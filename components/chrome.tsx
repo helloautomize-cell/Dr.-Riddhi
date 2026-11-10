@@ -88,6 +88,9 @@ export function MiniHeader({ active }: { active?: string }) {
             <NavLinks active={active} dropdown />
           </nav>
           <BookButton />
+          <button className="menu-btn" aria-label="Open menu">
+            <Icon id="i-menu" />
+          </button>
         </div>
       </div>
     </div>

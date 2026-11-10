@@ -25,7 +25,7 @@ export default function Effects() {
     );
 
     /* menu */
-    const mb = $("#menuBtn");
+    const mbs = $$(".menu-btn");
     const sheet = $("#sheet");
     const onOpen = () => {
       if (sheet) (sheet as HTMLElement).hidden = false;
@@ -33,7 +33,7 @@ export default function Effects() {
     const onClose = () => {
       if (sheet) (sheet as HTMLElement).hidden = true;
     };
-    mb?.addEventListener("click", onOpen);
+    mbs.forEach((b) => b.addEventListener("click", onOpen));
     $("#sheetX")?.addEventListener("click", onClose);
     const sheetLinks = $$("#sheet a");
     sheetLinks.forEach((a) => a.addEventListener("click", onClose));
@@ -128,7 +128,7 @@ export default function Effects() {
 
     return () => {
       cancelAnimationFrame(raf);
-      mb?.removeEventListener("click", onOpen);
+      mbs.forEach((b) => b.removeEventListener("click", onOpen));
       $("#sheetX")?.removeEventListener("click", onClose);
       sheetLinks.forEach((a) => a.removeEventListener("click", onClose));
       window.removeEventListener("scroll", onS);

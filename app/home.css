@@ -72,7 +72,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
 .mini .brand b{font-size:22px}.mini .brand small{display:none}.mini .brand .lg{width:40px;height:40px}.mini .brand .lg img{width:34px;height:34px}
 .mini .btn{min-height:46px;padding:0 20px;font-size:15px}
 @media(max-width:1100px){.mini .nav{display:none}.mini .btn{margin-left:auto}}
-@media(max-width:600px){.mini{display:none}}
+@media(max-width:600px){.mini .btn{display:none}}
 .sheet{position:fixed;inset:0;z-index:90;background:var(--brown-deep);color:var(--cream);padding:24px;display:flex;flex-direction:column}
 .sheet nav{display:flex;flex-direction:column;margin-top:30px}
 .sheet nav a{font:400 40px/1.25 var(--serif);text-decoration:none;padding:6px 0;border-bottom:1px solid rgba(251,247,243,.12)}

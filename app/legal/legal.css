@@ -1,0 +1,24 @@
+/* Legal template — ported verbatim from _source/pages/legal.html */
+.lgh{padding:clamp(24px,3vw,44px) 0 clamp(40px,5vw,60px);border-bottom:1px solid var(--line)}
+.lgh .g{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:end;margin-top:clamp(20px,3vw,40px)}
+.lgh .h1i{font-size:clamp(44px,5.4vw,80px)}
+.upd{display:flex;flex-direction:column;gap:6px;padding:18px 22px;border-radius:20px;background:var(--sand);font-size:13.5px;color:var(--ink-2);min-width:240px}
+.upd b{color:var(--brown);font-size:15px}
+.upd button{margin-top:6px;align-self:flex-start;border:0;background:none;color:var(--pink);font:600 14px/1 var(--sans);cursor:pointer;padding:6px 0;display:inline-flex;gap:6px;align-items:center;min-height:44px}
+.pols{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:18px 0}
+.pols a{white-space:nowrap;padding:10px 16px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font:500 14px/1 var(--sans);color:var(--brown);min-height:44px;display:inline-flex;align-items:center}
+.pols a.on{background:var(--brown);color:var(--cream);box-shadow:none}
+.lgw{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(40px,6vw,96px);padding:clamp(50px,6vw,90px) 0 clamp(80px,9vw,140px)}
+.lgw .toc{counter-reset:t}
+.lgw .toc a{counter-increment:t}
+.lgw .toc a::before{content:counter(t,decimal-leading-zero);width:auto;height:auto;background:none;font:400 15px/1 var(--serif);color:var(--blush);transition:color .3s}
+.lgw .toc a.on::before{width:auto;color:var(--pink)}
+.prose table{width:100%;border-collapse:collapse;margin-top:16px;font-size:15px}
+.prose th,.prose td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.prose th{font:600 12px/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);background:var(--sand)}
+.prose td{color:#4A3A42}
+.contactbox{margin-top:24px;border-radius:24px;background:var(--brown);color:var(--cream);padding:24px}
+.contactbox b{font:400 26px/1.1 var(--serif);display:block}
+.contactbox p{color:rgba(251,247,243,.8)!important;font-size:15px;margin-top:8px}
+@media(max-width:1000px){.lgw{grid-template-columns:minmax(0,1fr)}.lgw aside{display:none}.lgh .g{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.prose table{display:block;overflow-x:auto}}

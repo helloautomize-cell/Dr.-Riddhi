@@ -1,0 +1,17 @@
+/* Thank-you — ported verbatim from _source/pages/thank-you.html */
+.ty{min-height:72vh;display:grid;place-items:center;padding:60px 0 100px;text-align:center}
+.ty .tick{width:150px;height:150px;margin:0 auto;position:relative}
+.ty .tick svg{width:100%;height:100%}
+.ty .tick .c1{stroke-dasharray:440;stroke-dashoffset:440;animation:dr 1s var(--ease) .2s forwards}
+.ty .tick .c2{stroke-dasharray:80;stroke-dashoffset:80;animation:dr .6s var(--ease) 1s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.ty .burst i{position:absolute;left:50%;top:50%;width:10px;height:10px;border-radius:50%;background:var(--pink);opacity:0;animation:bu 1.2s var(--ease) 1.2s forwards}
+@keyframes bu{0%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y)))}}
+.ty .h1i{font-size:clamp(46px,6vw,90px);margin-top:26px}
+.ty .lead{margin:18px auto 0}
+.next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:860px;margin:44px auto 0;text-align:left}
+.next div{border-radius:22px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);padding:20px}
+.next b{display:block;font:400 24px/1.1 var(--serif);color:var(--brown);margin-top:8px}
+.next p{font-size:14px;color:var(--ink-2);margin-top:6px}
+.next span{font:400 30px/1 var(--serif);color:var(--pink)}
+@media(max-width:760px){.next{grid-template-columns:minmax(0,1fr)}}

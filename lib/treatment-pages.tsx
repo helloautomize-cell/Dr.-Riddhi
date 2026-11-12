@@ -56,6 +56,11 @@ const REV = (
   </>
 );
 
+/** PCOS page lead — the page lives inline in app/treatments/[slug]/page.tsx
+ *  (approved sample), so its lead is shared from here for llms-full.txt. */
+export const PCOS_LEAD =
+  "PCOS (polycystic ovary syndrome) is a common hormone condition that can cause irregular periods, acne, extra hair growth and trouble getting pregnant. At your visit Dr. Riddhi listens to your symptoms, examines you, and chooses only the tests you need. Then she explains a plan that fits your life and your plans for pregnancy.";
+
 export const REVIEWED_BYLINE = (
   <>
     Medically reviewed by <b>Dr. Riddhi D. Shah</b> · Last reviewed <Confirm label="confirm date" />

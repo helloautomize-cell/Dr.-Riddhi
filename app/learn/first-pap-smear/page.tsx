@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
+import { ARTICLE_FAQS } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "Your first Pap smear, step by step | Dr. Riddhi D. Shah",
@@ -62,9 +63,12 @@ export default function FirstPapSmearArticle() {
 
       <h2>Questions</h2>
       <div className="qa">
-        <details><summary>Who needs a Pap smear?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Screening is generally advised from age 21 or within a few years of becoming sexually active, then repeated every three to five years depending on the test used.</p></details>
-        <details><summary>Does it hurt?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>The speculum feels like pressure and the brush takes seconds. Most women rate it as uncomfortable rather than painful, and it is over quickly.</p></details>
-        <details><summary>Can I have a smear during my period?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Better to avoid it; blood can hide the cells the test needs. Book for a dry day if you can, or ask the clinic when you call.</p></details>
+        {ARTICLE_FAQS["first-pap-smear"].map((f) => (
+          <details key={f.q}>
+            <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
       </div>
     </ArticlePage>
   );

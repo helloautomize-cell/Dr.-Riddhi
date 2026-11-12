@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
+import { ARTICLE_FAQS } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "How heavy is too heavy? Periods explained | Dr. Riddhi D. Shah",
@@ -63,9 +64,12 @@ export default function HeavyPeriodsArticle() {
 
       <h2>Questions</h2>
       <div className="qa">
-        <details><summary>Is it heavy if it has always been like this?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Yes. Long-standing does not mean normal. Many women bleed heavily from their first periods and assume everyone does.</p></details>
-        <details><summary>When is heavy bleeding an emergency?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Soaking a pad every hour for several hours, bleeding with dizziness or fainting, or bleeding with severe tummy pain needs urgent care. Medical emergency? Call 108 or 112.</p></details>
-        <details><summary>Will I need surgery for heavy periods?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Usually not. Most heavy periods are controlled with medicines. Surgery is reserved for causes like fibroids that do not respond, and it is always a discussion, not a default.</p></details>
+        {ARTICLE_FAQS["heavy-periods"].map((f) => (
+          <details key={f.q}>
+            <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
       </div>
     </ArticlePage>
   );

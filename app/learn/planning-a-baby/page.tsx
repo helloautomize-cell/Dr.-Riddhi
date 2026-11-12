@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
+import { ARTICLE_FAQS } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "Planning a baby? Start three months early | Dr. Riddhi D. Shah",
@@ -61,9 +62,12 @@ export default function PlanningABabyArticle() {
 
       <h2>Questions</h2>
       <div className="qa">
-        <details><summary>We already started trying. Is it too late?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Not at all. Start folic acid today and book the check anyway; everything on the list still helps.</p></details>
-        <details><summary>Does my husband need to do anything?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Mostly lifestyle: no smoking, limited alcohol, and a general health review. Formal testing for him becomes relevant if conception takes longer than expected.</p></details>
-        <details><summary>How long after stopping contraception can I conceive?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Fertility usually returns quickly after stopping pills, though cycles may take a month or two to settle. You can start folic acid while still on contraception.</p></details>
+        {ARTICLE_FAQS["planning-a-baby"].map((f) => (
+          <details key={f.q}>
+            <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
       </div>
     </ArticlePage>
   );

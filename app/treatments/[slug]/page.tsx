@@ -5,7 +5,8 @@ import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import TreatmentPage from "@/components/TreatmentPage";
 import { GROUPS, TREATMENTS } from "@/lib/treatments";
-import { TREATMENT_PAGES, TreatmentBody, REVIEWED_BYLINE } from "@/lib/treatment-pages";
+import { TREATMENT_PAGES, TreatmentBody, REVIEWED_BYLINE, PCOS_LEAD } from "@/lib/treatment-pages";
+import { PCOS_FAQS } from "@/lib/faqs";
 import "../treatment.css";
 
 const PAGES = TREATMENTS.filter((t) => t.group !== "surg");
@@ -114,22 +115,12 @@ function PcosBody() {
 
       <h2 id="faq">Questions about PCOS</h2>
       <div className="qa">
-        <details open>
-          <summary>Can PCOS be cured?<i><Icon name="i-plus" width={18} height={18} /></i></summary>
-          <p>PCOS is a long-term condition, so it is managed rather than cured. With the right plan, most women keep their periods regular and their symptoms under control. The plan changes as your life and goals change.</p>
-        </details>
-        <details>
-          <summary>Can I get pregnant if I have PCOS?<i><Icon name="i-plus" width={18} height={18} /></i></summary>
-          <p>Many women with PCOS get pregnant, some naturally and some with help to release an egg. Tell Dr. Riddhi if you are planning a pregnancy, so the tests and treatment are chosen with that in mind.</p>
-        </details>
-        <details>
-          <summary>Do I have to lose weight?<i><Icon name="i-plus" width={18} height={18} /></i></summary>
-          <p>Not everyone with PCOS is overweight. If you are, even a small loss of weight can make periods more regular. You will get practical advice that fits your routine, not a strict diet.</p>
-        </details>
-        <details>
-          <summary>Is an ultrasound always needed?<i><Icon name="i-plus" width={18} height={18} /></i></summary>
-          <p>Not always. PCOS can often be identified from your periods and blood tests. An ultrasound is advised only if it will change your plan.</p>
-        </details>
+        {PCOS_FAQS.map((f, i) => (
+          <details key={f.q} open={i === 0}>
+            <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
       </div>
 
       <div className="revbox">
@@ -155,7 +146,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         groupLabel={groupLabel}
         name="PCOS"
         h1={["PCOS, explained", <em key="e">and managed</em>]}
-        lead="PCOS (polycystic ovary syndrome) is a common hormone condition that can cause irregular periods, acne, extra hair growth and trouble getting pregnant. At your visit Dr. Riddhi listens to your symptoms, examines you, and chooses only the tests you need. Then she explains a plan that fits your life and your plans for pregnancy."
+        lead={PCOS_LEAD}
         ctaLabel="Book a PCOS consultation"
         byline={REVIEWED}
         art={PcosArt}

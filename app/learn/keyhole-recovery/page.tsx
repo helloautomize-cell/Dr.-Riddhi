@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
+import { ARTICLE_FAQS } from "@/lib/faqs";
 
 export const metadata: Metadata = {
   title: "Recovering after keyhole surgery | Dr. Riddhi D. Shah",
@@ -62,9 +63,12 @@ export default function KeyholeRecoveryArticle() {
 
       <h2>Questions</h2>
       <div className="qa">
-        <details><summary>How long does full recovery take?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>The outside heals in about two weeks; inside takes a few weeks longer depending on what was done. Most women feel themselves again within two to four weeks for standard procedures.</p></details>
-        <details><summary>Is shoulder-tip pain normal?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Yes, it is the residual gas irritating the diaphragm. Walking and time clear it, usually within two days.</p></details>
-        <details><summary>When can I drive?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Usually after about a week, once you can move freely and brake without pain, and you are off sedating painkillers.</p></details>
+        {ARTICLE_FAQS["keyhole-recovery"].map((f) => (
+          <details key={f.q}>
+            <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
       </div>
     </ArticlePage>
   );

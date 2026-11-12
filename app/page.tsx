@@ -4,6 +4,7 @@ import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import HomeFx from "@/components/HomeFx";
 import { site } from "@/lib/site-config";
+import { HOME_FAQS } from "@/lib/faqs";
 import "./home.css";
 
 export const metadata: Metadata = {
@@ -406,11 +407,12 @@ export default function HomePage() {
             <div className="reviewed"><img src="/images/halo-portrait.webp" alt="" /><span>Medically reviewed by <b style={{ color: "var(--brown)" }}>Dr. Riddhi D. Shah</b><br />Last reviewed <Confirm label="confirm date" /></span></div>
           </div>
           <div className="qa">
-            <details open><summary>Can I talk about something embarrassing?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Yes. Nothing you bring up is unusual for a gynaecologist. The consultation room is private, and you can ask for a female attendant during any examination.</p></details>
-            <details><summary>Do I need to come on a certain day of my cycle?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>For most visits, no. For some scans or tests a specific day helps. When you book, mention why you are coming and the clinic will tell you the best day.</p></details>
-            <details><summary>What should I bring?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Old reports and scans, a list of medicines you take, and the date your last period started.</p></details>
-            <details><summary>Does every fibroid or cyst need surgery?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>No. Many only need watching. Whether treatment is needed depends on size, symptoms and your plans, which she will explain after examining you.</p></details>
-            <details><summary>Is the HPV vaccine only for teenagers?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>It works best at a younger age, but adults can also benefit. Ask at your visit whether it suits you.</p></details>
+            {HOME_FAQS.map((f, i) => (
+              <details key={f.q} open={i === 0}>
+                <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

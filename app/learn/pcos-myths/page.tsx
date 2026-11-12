@@ -3,6 +3,7 @@ import Link from "next/link";
 import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import ArticleFx from "@/components/ArticleFx";
+import { ARTICLE_FAQS } from "@/lib/faqs";
 import "../article.css";
 
 export const metadata: Metadata = {
@@ -87,8 +88,12 @@ export default function PcosMythsArticle() {
           </p>
           <h2>Questions</h2>
           <div className="qa">
-            <details><summary>Does PCOS go away after marriage or pregnancy?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>No. Marriage does not change PCOS. Symptoms may change over the years, so check-ups continue to matter.</p></details>
-            <details><summary>Can teenagers have PCOS?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Yes, but irregular periods are common in the first years after periods start. A doctor usually waits and watches before calling it PCOS.</p></details>
+            {ARTICLE_FAQS["pcos-myths"].map((f) => (
+              <details key={f.q}>
+                <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
           <div className="revbox" style={{ marginTop: 36 }}>
             <img src="/images/halo-portrait.webp" alt="" />

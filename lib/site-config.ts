@@ -13,6 +13,19 @@ export const site = {
   tagline: "Gynaecology · Borivali West",
   brandTag: "The Chill Gynae",
 
+  /**
+   * Canonical origin used by metadata, sitemap, robots, schema and llms files.
+   * Set SITE_URL on Vercel when the custom domain attaches — no code change.
+   */
+  url: process.env.SITE_URL ?? "https://dr-riddhi.vercel.app",
+
+  /** Indexable by default; SITE_INDEXABLE=0 keeps a deploy dark (staging). */
+  indexable: process.env.SITE_INDEXABLE !== "0",
+
+  /** Content review stamp shown on pages and emitted in schema/llms files. */
+  reviewed: "November 2026",
+  reviewedIso: "2026-11-12",
+
   address:
     "A-wing 301/302, Swastik Building, Swami Vivekanand Road (S.V. Road), next to Vijay Sales, opp. Bharat Petroleum, Dattani Nagar, Borivali West, Mumbai 400092",
   addressShort:

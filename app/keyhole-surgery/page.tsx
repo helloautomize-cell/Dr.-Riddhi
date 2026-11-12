@@ -4,6 +4,7 @@ import Icon from "@/components/Icon";
 import Confirm from "@/components/Confirm";
 import KeyholeFx from "@/components/KeyholeFx";
 import { site } from "@/lib/site-config";
+import { KEYHOLE_FAQS } from "@/lib/faqs";
 import "./keyhole.css";
 
 export const metadata: Metadata = {
@@ -161,10 +162,12 @@ export default function KeyholePage() {
             <span className="kick">Common questions</span>
             <h2 className="h2" style={{ marginBottom: 24 }}>About keyhole <em>surgery</em></h2>
             <div className="qa">
-              <details open><summary>Is keyhole surgery always possible?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Not always. It depends on the size of a fibroid or cyst, earlier surgeries and your health. If open surgery is safer for you, she will explain why before you decide.</p></details>
-              <details><summary>Will there be scars?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>There are small marks where the cuts were made. They usually fade over months. Hysteroscopy leaves no scar because there is no cut.</p></details>
-              <details><summary>Where is the surgery done?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>At an empanelled hospital with an operating theatre and anaesthesia team. The clinic will tell you which hospital and help with the admission steps.</p></details>
-              <details><summary>Is it covered by insurance?<i><Icon name="i-plus" width={18} height={18} /></i></summary><p>Most health policies cover planned gynae surgery. The hospital desk can check your policy and the paperwork before the date is fixed.</p></details>
+              {KEYHOLE_FAQS.map((f, i) => (
+                <details key={f.q} open={i === 0}>
+                  <summary>{f.q}<i><Icon name="i-plus" width={18} height={18} /></i></summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
             </div>
             <div className="hosp">Surgery is done at empanelled hospitals in and around Borivali. <Confirm label="confirm hospital names" /></div>
             <div className="revbox" style={{ marginTop: 16 }}>

@@ -1,26 +1,32 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
 import { ARTICLE_FAQS } from "@/lib/faqs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/learn/first-pap-smear/",
   title: "Your first Pap smear, step by step | Dr. Riddhi D. Shah",
   description:
     "What actually happens during a Pap smear, how to prepare, what it feels like and when results come. By Dr. Riddhi D. Shah, Borivali West.",
-};
+  type: "article",
+});
 
 export default function FirstPapSmearArticle() {
   return (
     <ArticlePage
+      path="/learn/first-pap-smear/"
+      title="Your first Pap smear, step by step | Dr. Riddhi D. Shah"
+      description="What actually happens during a Pap smear, how to prepare, what it feels like and when results come. By Dr. Riddhi D. Shah, Borivali West."
+      faqs={ARTICLE_FAQS["first-pap-smear"]}
       crumbs="First Pap smear"
       kick="Screening · 5 min read"
       h1={["Your first Pap smear,", "step by step"]}
       share="Your first Pap smear, step by step — Dr. Riddhi D. Shah"
       cover={{ icon: "c-shield", bg: "var(--halo)", iconColor: "var(--brown)" }}
       sources={[
-        "WHO guideline for cervical cancer screening. <Confirm />",
-        "ICMR / national screening guidance. <Confirm />",
+        "WHO guideline for cervical cancer screening.",
+        "ICMR / national screening guidance.",
       ]}
       related={[
         { href: "/treatments/pap-smear-hpv-vaccine/", icon: "c-shield", title: "Pap smear and HPV vaccine", sub: "Who needs it and when." },
@@ -58,7 +64,7 @@ export default function FirstPapSmearArticle() {
       <p className="callout">
         &quot;The women who are most nervous beforehand are usually the ones who say, that was it? afterwards. Knowing the steps is half the battle.&quot;
         <br />
-        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah <Confirm label="approve quote" /></small>
+        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah</small>
       </p>
 
       <h2>Questions</h2>

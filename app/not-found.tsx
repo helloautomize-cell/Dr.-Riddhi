@@ -6,6 +6,7 @@ import { BOOK_HREF } from "@/lib/nav";
 export const metadata: Metadata = {
   title: "Page not found",
   description: "This page could not be found.",
+  robots: { index: false, follow: false },
 };
 
 const LINKS = [

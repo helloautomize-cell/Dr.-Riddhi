@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
-
-const indexable = process.env.SITE_INDEXABLE === "1";
+import { site } from "./lib/site-config";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
@@ -9,7 +8,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async headers() {
-    if (indexable) return [];
+    if (site.indexable) return [];
     return [
       {
         source: "/:path*",

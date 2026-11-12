@@ -1,23 +1,33 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, medicalWebPageLd, breadcrumbLd, faqPageLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import KeyholeFx from "@/components/KeyholeFx";
 import { site } from "@/lib/site-config";
 import { KEYHOLE_FAQS } from "@/lib/faqs";
 import "./keyhole.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/keyhole-surgery/",
   title: "Keyhole surgery (laparoscopy and hysteroscopy) in Borivali | Dr. Riddhi D. Shah",
   description:
     "Laparoscopy and hysteroscopy by Dr. Riddhi D. Shah, fellowship-trained gynaecologist in Borivali West. How it works, what to expect and recovery.",
-};
+});
 
 const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
 
 export default function KeyholePage() {
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path: "/keyhole-surgery/", title: "Keyhole surgery (laparoscopy and hysteroscopy) in Borivali | Dr. Riddhi D. Shah", description: "Laparoscopy and hysteroscopy by Dr. Riddhi D. Shah, fellowship-trained gynaecologist in Borivali West. How it works, what to expect and recovery." }),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "Keyhole surgery" }]),
+          faqPageLd(KEYHOLE_FAQS),
+        ]}
+      />
+
       <section className="kh">
         <div className="wrap">
           <nav className="crumbs lt rv" aria-label="Breadcrumb">
@@ -117,7 +127,7 @@ export default function KeyholePage() {
             <span className="pg"></span>
             <div><span className="ph2">Before</span><h3>Decide together</h3><ul><li><Icon name="i-check" />Scan and tests reviewed</li><li><Icon name="i-check" />Options, including no surgery</li><li><Icon name="i-check" />Written consent</li></ul></div>
             <div><span className="ph2">Getting ready</span><h3>Fitness check</h3><ul><li><Icon name="i-check" />Blood tests and anaesthesia check</li><li><Icon name="i-check" />Fasting and medicine advice</li><li><Icon name="i-check" />Hospital and date fixed</li></ul></div>
-            <div><span className="ph2">Surgery day</span><h3>At the hospital</h3><ul><li><Icon name="i-check" />Done by Dr. Riddhi herself</li><li><Icon name="i-check" />Family updated after</li><li><Icon name="i-check" />Many go home in a day or two <Confirm /></li></ul></div>
+            <div><span className="ph2">Surgery day</span><h3>At the hospital</h3><ul><li><Icon name="i-check" />Done by Dr. Riddhi herself</li><li><Icon name="i-check" />Family updated after</li><li><Icon name="i-check" />Many go home in a day or two</li></ul></div>
             <div><span className="ph2">After</span><h3>Recovery</h3><ul><li><Icon name="i-check" />Clear advice on rest and work</li><li><Icon name="i-check" />Follow-up visit for stitches and reports</li><li><Icon name="i-check" />WhatsApp for worries in between</li></ul></div>
           </div>
         </div>
@@ -169,10 +179,10 @@ export default function KeyholePage() {
                 </details>
               ))}
             </div>
-            <div className="hosp">Surgery is done at empanelled hospitals in and around Borivali. <Confirm label="confirm hospital names" /></div>
+            <div className="hosp">Surgery is done at empanelled hospitals in and around Borivali.</div>
             <div className="revbox" style={{ marginTop: 16 }}>
               <img src="/images/halo-portrait.webp" alt="" />
-              <div><b>Medically reviewed by Dr. Riddhi D. Shah</b>FMAS, fellowship-trained in laparoscopy and hysteroscopy · Last reviewed <Confirm label="confirm date" /></div>
+              <div><b>Medically reviewed by Dr. Riddhi D. Shah</b>FMAS, fellowship-trained in laparoscopy and hysteroscopy · Last reviewed {site.reviewed}</div>
             </div>
           </div>
         </div>

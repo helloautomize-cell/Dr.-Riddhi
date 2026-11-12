@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import Icon from "./Icon";
 import { BOOK_HREF } from "@/lib/nav";
 import { site } from "@/lib/site-config";
+import { JsonLd, medicalWebPageLd, breadcrumbLd, faqPageLd } from "@/lib/schema";
+import type { FaqItem } from "@/lib/faqs";
 
 export interface StripItem {
   icon: string;
@@ -39,6 +41,9 @@ export default function TreatmentPage({
   toc,
   children,
   related,
+  path,
+  meta,
+  faqs,
 }: {
   groupLabel: string;
   name: string;
@@ -51,9 +56,23 @@ export default function TreatmentPage({
   toc: TocItem[];
   children: ReactNode;
   related: RelItem[];
+  path: string;
+  meta: { title: string; description: string };
+  faqs?: FaqItem[];
 }) {
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path, ...meta }),
+          breadcrumbLd([
+            { label: "Home", path: "/" },
+            { label: "Treatments", path: "/treatments/" },
+            { label: name },
+          ]),
+          ...(faqs?.length ? [faqPageLd(faqs)] : []),
+        ]}
+      />
       <section className="sh">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">

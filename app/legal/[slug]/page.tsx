@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
+import { site } from "@/lib/site-config";
 import { LEGAL_NAV, LEGAL_PAGES } from "@/lib/legal-content";
 import LegalFx from "@/components/LegalFx";
 import "../legal.css";
@@ -15,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const p = LEGAL_PAGES.find((x) => x.slug === slug);
   if (!p) return {};
-  return { title: `${p.label} | Dr. Riddhi D. Shah`, description: p.lead };
+  return pageMeta({ path: `/legal/${slug}/`, title: `${p.label} | Dr. Riddhi D. Shah`, description: p.lead });
 }
 
 export default async function LegalPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -24,6 +26,15 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
   if (!p) notFound();
   return (
     <>
+      <JsonLd
+        data={[
+          breadcrumbLd([
+            { label: "Home", path: "/" },
+            { label: "Legal" },
+            { label: p.label },
+          ]),
+        ]}
+      />
       <section className="lgh">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">
@@ -39,7 +50,7 @@ export default async function LegalPage({ params }: { params: Promise<{ slug: st
             </div>
             <div className="upd rv" style={{ "--d": 4 } as React.CSSProperties}>
               <span>Last updated</span>
-              <b><Confirm label="launch date" /></b>
+              <b>{site.reviewed}</b>
               <span>Reading time: {p.readTime}</span>
               <PrintBtn />
             </div>

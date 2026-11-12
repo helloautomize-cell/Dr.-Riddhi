@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import TreatmentPage from "@/components/TreatmentPage";
 import { GROUPS, TREATMENTS } from "@/lib/treatments";
 import { TREATMENT_PAGES, TreatmentBody, REVIEWED_BYLINE, PCOS_LEAD } from "@/lib/treatment-pages";
 import { PCOS_FAQS } from "@/lib/faqs";
+import { site } from "@/lib/site-config";
 import "../treatment.css";
 
 const PAGES = TREATMENTS.filter((t) => t.group !== "surg");
@@ -19,15 +20,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const t = PAGES.find((x) => x.slug === slug);
   if (!t) return {};
+  const path = `/treatments/${slug}/`;
   if (t.slug === "pcos")
-    return {
+    return pageMeta({
+      path,
       title: "PCOS treatment in Borivali | Dr. Riddhi D. Shah",
       description:
         "PCOS care by Dr. Riddhi D. Shah, gynaecologist in Borivali West. What PCOS is, signs to look for, what happens at your visit and how to prepare.",
-    };
+    });
   const def = TREATMENT_PAGES[t.slug];
-  if (def) return { title: def.meta.title, description: def.meta.description };
-  return { title: `${t.name} | Dr. Riddhi D. Shah`, description: t.desc };
+  if (def) return pageMeta({ path, title: def.meta.title, description: def.meta.description });
+  return pageMeta({ path, title: `${t.name} | Dr. Riddhi D. Shah`, description: t.desc });
 }
 
 /* ---- PCOS badge art (approved animated ovary illustration) ---- */
@@ -53,7 +56,7 @@ const PcosArt = (
 
 const REVIEWED = (
   <>
-    Medically reviewed by <b>Dr. Riddhi D. Shah</b> · Last reviewed <Confirm label="confirm date" />
+    Medically reviewed by <b>Dr. Riddhi D. Shah</b> · Last reviewed {site.reviewed}
   </>
 );
 
@@ -127,7 +130,7 @@ function PcosBody() {
         <img src="/images/halo-portrait.webp" alt="" />
         <div>
           <b>Medically reviewed by Dr. Riddhi D. Shah</b>
-          MBBS, DNB (OBGY), FMAS, DRM · Last reviewed <Confirm label="confirm date" />. This page is for general information and does not replace a consultation.
+          MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}. This page is for general information and does not replace a consultation.
         </div>
       </div>
     </>
@@ -151,9 +154,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         byline={REVIEWED}
         art={PcosArt}
         strip={[
-          { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+          { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
           { icon: "i-doc", small: "Tests", big: "Chosen after the exam: blood tests, ultrasound" },
-          { icon: "i-cal", small: "Best day to come", big: <>Day 2 to 5 of your period, if possible <Confirm /></> },
+          { icon: "i-cal", small: "Best day to come", big: "Day 2 to 5 of your period, if possible" },
           { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
         ]}
         toc={[
@@ -170,6 +173,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           { href: "/treatments/planning-a-pregnancy/", icon: "c-egg", title: "Planning a pregnancy", sub: "A check before you start trying." },
           { href: "/learn/pcos-myths/", icon: "c-ask", title: "Article: PCOS myths", sub: "Five things women are often told about PCOS." },
         ]}
+        path="/treatments/pcos/"
+        meta={{
+          title: "PCOS treatment in Borivali | Dr. Riddhi D. Shah",
+          description:
+            "PCOS care by Dr. Riddhi D. Shah, gynaecologist in Borivali West. What PCOS is, signs to look for, what happens at your visit and how to prepare.",
+        }}
+        faqs={PCOS_FAQS}
       >
         <PcosBody />
       </TreatmentPage>
@@ -200,6 +210,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       strip={def.strip}
       toc={def.toc}
       related={def.related}
+      path={`/treatments/${slug}/`}
+      meta={def.meta}
+      faqs={def.faqs}
     >
       <TreatmentBody d={def} />
     </TreatmentPage>

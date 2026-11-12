@@ -266,9 +266,9 @@ export function MobileBar({ waTitle }: { waTitle?: string }) {
   );
 }
 
-/** Yellow "design preview" badge; hidden once the site is marked indexable. */
+/** Yellow "design preview" badge; shown only on dark/staging builds. */
 export function PreviewBadge() {
-  if (process.env.SITE_INDEXABLE === "1") return null;
+  if (site.indexable) return null;
   return <span className="badge-pv">Design preview · AI images pending her approval</span>;
 }
 
@@ -287,7 +287,7 @@ export function Crumbs({
       "@type": "ListItem",
       position: i + 1,
       name: c.label,
-      ...(c.href ? { item: c.href } : {}),
+      ...(c.href ? { item: `${site.url}${c.href}` } : {}),
     })),
   };
   return (

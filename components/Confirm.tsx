@@ -1,18 +1,20 @@
+import { site } from "@/lib/site-config";
+
 /**
  * Yellow CONFIRM chip marking a fact still needed from the clinic.
- * Renders in every non-indexable build; disappears from markup once
- * SITE_INDEXABLE=1 (launch-check also fails if any remain — Phase 3).
+ * Renders only in dark/staging builds (SITE_INDEXABLE=0); production
+ * must never show it — every call site uses a safe fallback instead.
  */
 export default function Confirm({ label = "confirm" }: { label?: string }) {
-  if (process.env.SITE_INDEXABLE === "1") return null;
+  if (site.indexable) return null;
   return <span className="confirm">{label}</span>;
 }
 
 /**
  * Wraps content that exists only while facts are unconfirmed (dev notes,
- * placeholder blocks). Hidden entirely once SITE_INDEXABLE=1.
+ * placeholder blocks). Hidden in indexable builds.
  */
 export function DevOnly({ children }: { children: React.ReactNode }) {
-  if (process.env.SITE_INDEXABLE === "1") return null;
+  if (site.indexable) return null;
   return <>{children}</>;
 }

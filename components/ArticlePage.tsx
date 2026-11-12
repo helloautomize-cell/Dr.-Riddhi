@@ -1,8 +1,10 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import Icon from "./Icon";
-import Confirm from "./Confirm";
 import ArticleFx from "./ArticleFx";
+import { site } from "@/lib/site-config";
+import { JsonLd, articleLd, breadcrumbLd, faqPageLd } from "@/lib/schema";
+import type { FaqItem } from "@/lib/faqs";
 import "../app/learn/article.css";
 
 export interface ArticleRel {
@@ -28,6 +30,10 @@ export default function ArticlePage({
   children,
   sources,
   related,
+  path,
+  title,
+  description,
+  faqs,
 }: {
   crumbs: string;
   kick: string;
@@ -37,9 +43,24 @@ export default function ArticlePage({
   children: ReactNode;
   sources: ReactNode[];
   related: ArticleRel[];
+  path: string;
+  title: string;
+  description: string;
+  faqs?: FaqItem[];
 }) {
   return (
     <>
+      <JsonLd
+        data={[
+          articleLd({ path, title, description }),
+          breadcrumbLd([
+            { label: "Home", path: "/" },
+            { label: "Learn", path: "/learn/" },
+            { label: crumbs },
+          ]),
+          ...(faqs?.length ? [faqPageLd(faqs)] : []),
+        ]}
+      />
       <div className="rp" id="rp"></div>
       <section className="ah2">
         <div className="wrap">
@@ -54,7 +75,7 @@ export default function ArticlePage({
             </h1>
             <div className="auth rv" style={d(4)}>
               <img src="/images/halo-portrait.webp" alt="" />
-              <span><b>Dr. Riddhi D. Shah</b>Published <Confirm label="date" /> · Updated <Confirm label="date" /></span>
+              <span><b>Dr. Riddhi D. Shah</b>Published and updated {site.reviewed}</span>
             </div>
           </div>
           <div className="cover rv" style={{ ...d(5), background: cover.bg }} aria-hidden="true">
@@ -77,7 +98,7 @@ export default function ArticlePage({
           {children}
           <div className="revbox" style={{ marginTop: 36 }}>
             <img src="/images/halo-portrait.webp" alt="" />
-            <div><b>Written and reviewed by Dr. Riddhi D. Shah</b>MBBS, DNB (OBGY), FMAS, DRM · Last reviewed <Confirm label="date" /></div>
+            <div><b>Written and reviewed by Dr. Riddhi D. Shah</b>MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}</div>
           </div>
           <div className="sources">
             <b>Sources</b>

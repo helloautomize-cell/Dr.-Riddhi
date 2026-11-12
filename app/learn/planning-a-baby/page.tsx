@@ -1,26 +1,32 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
 import { ARTICLE_FAQS } from "@/lib/faqs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/learn/planning-a-baby/",
   title: "Planning a baby? Start three months early | Dr. Riddhi D. Shah",
   description:
     "The checks, vaccines and vitamins to sort out before you start trying: folic acid, thyroid, anaemia, rubella and medicines. By Dr. Riddhi D. Shah, Borivali West.",
-};
+  type: "article",
+});
 
 export default function PlanningABabyArticle() {
   return (
     <ArticlePage
+      path="/learn/planning-a-baby/"
+      title="Planning a baby? Start three months early | Dr. Riddhi D. Shah"
+      description="The checks, vaccines and vitamins to sort out before you start trying: folic acid, thyroid, anaemia, rubella and medicines. By Dr. Riddhi D. Shah, Borivali West."
+      faqs={ARTICLE_FAQS["planning-a-baby"]}
       crumbs="Planning a baby"
       kick="Pregnancy plans · 5 min read"
       h1={["Planning a baby?", "Start three months early"]}
       share="Planning a baby? Start three months early — Dr. Riddhi D. Shah"
       cover={{ icon: "c-egg", bg: "var(--sand)", iconColor: "var(--pink)" }}
       sources={[
-        "WHO and FIGO guidance on preconception care. <Confirm />",
-        "FOGSI guidance on preconception optimisation. <Confirm />",
+        "WHO and FIGO guidance on preconception care.",
+        "FOGSI guidance on preconception optimisation.",
       ]}
       related={[
         { href: "/treatments/planning-a-pregnancy/", icon: "c-egg", title: "Planning a pregnancy", sub: "What the preconception visit covers." },
@@ -57,7 +63,7 @@ export default function PlanningABabyArticle() {
       <p className="callout">
         &quot;A preconception visit is usually one appointment and a short list. The couples who do it walk into pregnancy already ahead.&quot;
         <br />
-        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah <Confirm label="approve quote" /></small>
+        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah</small>
       </p>
 
       <h2>Questions</h2>

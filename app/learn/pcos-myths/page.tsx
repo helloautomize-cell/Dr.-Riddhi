@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import ArticleFx from "@/components/ArticleFx";
+import { site } from "@/lib/site-config";
 import { ARTICLE_FAQS } from "@/lib/faqs";
+import { JsonLd, articleLd, breadcrumbLd, faqPageLd } from "@/lib/schema";
 import "../article.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/learn/pcos-myths/",
   title: "Five PCOS myths, and what is actually true | Dr. Riddhi D. Shah",
   description:
     "Five common PCOS myths explained by gynaecologist Dr. Riddhi D. Shah, Borivali West: pregnancy, weight, cysts and treatment.",
-};
+  type: "article",
+});
 
 const MYTHS = [
   { m: "Myth 1", q: "\u201CPCOS means I can never get pregnant.\u201D", a: "Many women with PCOS conceive naturally. Others need medicine to help release an egg. Planning early helps." },
@@ -25,6 +29,22 @@ const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
 export default function PcosMythsArticle() {
   return (
     <>
+      <JsonLd
+        data={[
+          articleLd({
+            path: "/learn/pcos-myths/",
+            title: "Five PCOS myths, and what is actually true | Dr. Riddhi D. Shah",
+            description:
+              "Five common PCOS myths explained by gynaecologist Dr. Riddhi D. Shah, Borivali West: pregnancy, weight, cysts and treatment.",
+          }),
+          breadcrumbLd([
+            { label: "Home", path: "/" },
+            { label: "Learn", path: "/learn/" },
+            { label: "PCOS myths" },
+          ]),
+          faqPageLd(ARTICLE_FAQS["pcos-myths"]),
+        ]}
+      />
       <div className="rp" id="rp"></div>
       <section className="ah2">
         <div className="wrap">
@@ -39,7 +59,7 @@ export default function PcosMythsArticle() {
             </h1>
             <div className="auth rv" style={d(4)}>
               <img src="/images/halo-portrait.webp" alt="" />
-              <span><b>Dr. Riddhi D. Shah</b>Published <Confirm label="date" /> · Updated <Confirm label="date" /></span>
+              <span><b>Dr. Riddhi D. Shah</b>Published and updated {site.reviewed}</span>
             </div>
           </div>
           <div className="cover rv" style={d(5)} aria-hidden="true">
@@ -84,7 +104,7 @@ export default function PcosMythsArticle() {
           <p className="callout">
             &quot;Most of my PCOS patients feel better once they understand what is going on. The plan is easier to follow when it makes sense.&quot;
             <br />
-            <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah <Confirm label="approve quote" /></small>
+            <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah</small>
           </p>
           <h2>Questions</h2>
           <div className="qa">
@@ -97,13 +117,13 @@ export default function PcosMythsArticle() {
           </div>
           <div className="revbox" style={{ marginTop: 36 }}>
             <img src="/images/halo-portrait.webp" alt="" />
-            <div><b>Written and reviewed by Dr. Riddhi D. Shah</b>MBBS, DNB (OBGY), FMAS, DRM · Last reviewed <Confirm label="date" /></div>
+            <div><b>Written and reviewed by Dr. Riddhi D. Shah</b>MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}</div>
           </div>
           <div className="sources">
             <b>Sources</b>
             <ol>
               <li>International evidence-based guideline for PCOS, 2023.</li>
-              <li>FOGSI guidance on PCOS. <Confirm /></li>
+              <li>FOGSI guidance on PCOS.</li>
             </ol>
           </div>
         </article>

@@ -1,18 +1,19 @@
 import type { MetadataRoute } from "next";
 import { TREATMENTS } from "@/lib/treatments";
 import { LEGAL_PAGES } from "@/lib/legal-content";
+import { site } from "@/lib/site-config";
 
-const BASE = "https://www.drriddhishah.com";
+const LAST_MODIFIED = new Date(site.reviewedIso);
 
-const STATIC_ROUTES = [
-  "/",
-  "/about/",
-  "/treatments/",
-  "/keyhole-surgery/",
-  "/your-first-visit/",
-  "/contact/",
-  "/learn/",
-  "/faqs/",
+const STATIC_ROUTES: { path: string; priority: number; freq: "weekly" | "monthly" | "yearly" }[] = [
+  { path: "/", priority: 1, freq: "weekly" },
+  { path: "/treatments/", priority: 0.9, freq: "monthly" },
+  { path: "/keyhole-surgery/", priority: 0.9, freq: "monthly" },
+  { path: "/about/", priority: 0.8, freq: "monthly" },
+  { path: "/your-first-visit/", priority: 0.8, freq: "monthly" },
+  { path: "/contact/", priority: 0.8, freq: "monthly" },
+  { path: "/learn/", priority: 0.7, freq: "monthly" },
+  { path: "/faqs/", priority: 0.7, freq: "monthly" },
 ];
 
 const ARTICLES = [
@@ -25,13 +26,35 @@ const ARTICLES = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const treatmentRoutes = TREATMENTS.filter((t) => t.group !== "surg").map(
-    (t) => t.href
+    (t) => t.href,
   );
   const legalRoutes = LEGAL_PAGES.map((p) => `/legal/${p.slug}/`);
-  const all = [...STATIC_ROUTES, ...treatmentRoutes, ...ARTICLES, ...legalRoutes];
-  return all.map((path) => ({
-    url: `${BASE}${path}`,
-    changeFrequency: path === "/" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : path.endsWith("/treatments/") ? 0.9 : 0.7,
-  }));
+
+  const entries: MetadataRoute.Sitemap = [
+    ...STATIC_ROUTES.map((r) => ({
+      url: `${site.url}${r.path}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: r.freq,
+      priority: r.priority,
+    })),
+    ...treatmentRoutes.map((path) => ({
+      url: `${site.url}${path}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...ARTICLES.map((path) => ({
+      url: `${site.url}${path}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    ...legalRoutes.map((path) => ({
+      url: `${site.url}${path}`,
+      lastModified: LAST_MODIFIED,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
+  ];
+  return entries;
 }

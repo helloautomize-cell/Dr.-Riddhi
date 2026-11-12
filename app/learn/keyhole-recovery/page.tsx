@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
 import { ARTICLE_FAQS } from "@/lib/faqs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/learn/keyhole-recovery/",
   title: "Recovering after keyhole surgery | Dr. Riddhi D. Shah",
   description:
     "What the first two weeks after laparoscopy usually look like: pain, walking, stitches, food, work and the warning signs. By Dr. Riddhi D. Shah, Borivali West.",
-};
+  type: "article",
+});
 
 export default function KeyholeRecoveryArticle() {
   return (
     <ArticlePage
+      path="/learn/keyhole-recovery/"
+      title="Recovering after keyhole surgery | Dr. Riddhi D. Shah"
+      description="What the first two weeks after laparoscopy usually look like: pain, walking, stitches, food, work and the warning signs. By Dr. Riddhi D. Shah, Borivali West."
+      faqs={ARTICLE_FAQS["keyhole-recovery"]}
       crumbs="Keyhole surgery recovery"
       kick="Surgery · 6 min read"
       h1={["Recovering after", "keyhole surgery"]}
       share="Recovering after keyhole surgery — Dr. Riddhi D. Shah"
       cover={{ icon: "c-lap", bg: "var(--brown-deep)", iconColor: "var(--blush)" }}
       sources={[
-        "Standard post-laparoscopy recovery guidance. <Confirm />",
+        "Standard post-laparoscopy recovery guidance.",
       ]}
       related={[
         { href: "/keyhole-surgery/", icon: "c-scope", title: "Keyhole surgery", sub: "How laparoscopy and hysteroscopy work." },
@@ -58,7 +64,7 @@ export default function KeyholeRecoveryArticle() {
       <p className="callout">
         &quot;The women who recover smoothest are the ones who walk early and ask early. If something feels wrong, call; that is what the follow-up number is for.&quot;
         <br />
-        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah <Confirm label="approve quote" /></small>
+        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah</small>
       </p>
 
       <h2>Questions</h2>

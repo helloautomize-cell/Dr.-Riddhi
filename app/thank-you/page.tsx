@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Link from "next/link";
 import "./thank-you.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/thank-you/",
   title: "Request received | Dr. Riddhi D. Shah",
   description: "Your booking request has been received.",
-  robots: { index: false, follow: false },
-};
+  noindex: true,
+});
 
 const NEXT = [
   { n: "01", b: "We call you", p: "Usually within working hours, Monday to Friday." },

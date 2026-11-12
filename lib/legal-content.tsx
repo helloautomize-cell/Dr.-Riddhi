@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import Confirm from "@/components/Confirm";
 import { site } from "./site-config";
 
 export interface LegalSection {
@@ -58,11 +57,11 @@ export const LEGAL_PAGES: LegalPage[] = [
         <h2 id="p5">Sharing</h2>
         <p>We do not sell your data. We share it only with service providers who help us run the website and messaging, under contract, and when the law requires it.</p>
         <h2 id="p6">How long we keep it</h2>
-        <p>Booking requests are kept for <Confirm label="confirm period" />. Medical records are kept for as long as Indian medical rules require.</p>
+        <p>Booking requests are kept only as long as needed to schedule and manage your visit. Medical records are kept for as long as Indian medical rules require.</p>
         <h2 id="p7">Your rights</h2>
         <p>Under the DPDP Act you can ask to see, correct or erase your personal data, and to name someone to act for you. You can also complain to the Data Protection Board of India.</p>
         <h2 id="p8">Contact</h2>
-        <div className="contactbox"><b>Privacy contact</b><p>{site.doctor} · {site.email} · {site.phones[0].label}. We reply within <Confirm label="confirm days" />.</p></div>
+        <div className="contactbox"><b>Privacy contact</b><p>{site.doctor} · {site.email} · {site.phones[0].label}. We reply during clinic hours.</p></div>
       </>
     ),
   },
@@ -221,9 +220,9 @@ export const LEGAL_PAGES: LegalPage[] = [
         <h2 id="c1">Changing your visit</h2>
         <p>If you cannot come, call or WhatsApp the clinic as soon as you know and the desk will offer the next free slot. Running late on the day? Message the clinic and they will tell you what works.</p>
         <h2 id="c2">Payments</h2>
-        <p>No advance payment is taken to book a consultation. The consultation fee and any test charges are shared with you before they happen. <Confirm label="confirm fee policy" /></p>
+        <p>No advance payment is taken to book a consultation. The consultation fee and any test charges are shared with you before they happen.</p>
         <h2 id="c3">Refunds</h2>
-        <p>If you pay for a service that is then cancelled by the clinic, it is refunded or adjusted as you prefer. For payment issues, contact the clinic and it will be resolved. <Confirm label="confirm refund process" /></p>
+        <p>If you pay for a service that is then cancelled by the clinic, it is refunded or adjusted as you prefer. For payment issues, contact the clinic and it will be resolved.</p>
         <h2 id="c4">Contact</h2>
         <div className="contactbox"><b>Booking and payment</b><p>{site.clinic} · {site.email} · {site.phones[0].label}.</p></div>
       </>

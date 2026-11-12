@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, physicianClinicLd, webSiteLd, faqPageLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import HomeFx from "@/components/HomeFx";
 import { site } from "@/lib/site-config";
 import { HOME_FAQS } from "@/lib/faqs";
 import "./home.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/",
   title: "Dr. Riddhi D. Shah | Gynaecologist and laparoscopic surgeon, Borivali West",
   description:
     "Periods, PCOS, pregnancy plans, menopause and keyhole surgery at Mumbai Gastro-Liver and Gynaec Centre, Borivali West. Every concern heard, every option explained.",
-};
+});
 
 const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
 
@@ -26,66 +28,11 @@ const STEPS = [
 
 const wa = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to book a consultation with Dr. Riddhi.")}`;
 
-const PHYSICIAN_LD = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": ["Physician", "MedicalClinic"],
-      "@id": "https://www.drriddhishah.com/#clinic",
-      name: `${site.doctor} — ${site.clinic}`,
-      description: `${site.role} at ${site.clinic}, ${site.area}, ${site.city}. Periods, PCOS, pregnancy plans, menopause and keyhole surgery.`,
-      url: "https://www.drriddhishah.com/",
-      telephone: site.phones[0].label,
-      email: site.email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "A-wing 301/302, Swastik Building, S.V. Road, Dattani Nagar",
-        addressLocality: "Borivali West",
-        addressRegion: "Maharashtra",
-        postalCode: site.pincode,
-        addressCountry: "IN",
-      },
-      geo: { "@type": "GeoCoordinates", latitude: site.geo.lat, longitude: site.geo.lng },
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "10:00",
-          closes: "12:00",
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "16:00",
-          closes: "18:00",
-        },
-      ],
-      sameAs: [site.socials.instagram, site.socials.youtube],
-      medicalSpecialty: ["Gynecologic", "Obstetric"],
-      availableService: [
-        "Gynaecology consultations",
-        "Laparoscopic and hysteroscopic surgery",
-        "PCOS and period care",
-        "Preconception and fertility evaluation",
-        "Cervical cancer screening and HPV vaccination",
-        "Menopause care",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.drriddhishah.com/#site",
-      url: "https://www.drriddhishah.com/",
-      name: site.doctor,
-      publisher: { "@id": "https://www.drriddhishah.com/#clinic" },
-      inLanguage: "en-IN",
-    },
-  ],
-};
 
 export default function HomePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(PHYSICIAN_LD) }} />
+      <JsonLd data={[physicianClinicLd(), webSiteLd(), faqPageLd(HOME_FAQS)]} />
       <header className="hero">
         <div className="hero-pin" id="heroPin">
           <div className="wrap">
@@ -115,7 +62,7 @@ export default function HomePage() {
                   <div className="ring r0"></div>
                   <div className="halo" id="halo"></div>
                   <div className="bloom" id="bloom"></div>
-                  <img className="pimg" id="pimg" src="/images/halo-portrait.webp" alt="Dr. Riddhi D. Shah, gynaecologist and laparoscopic surgeon in Borivali West, Mumbai" />
+                  <img className="pimg" id="pimg" src="/images/halo-portrait.webp" alt="Dr. Riddhi D. Shah, gynaecologist and laparoscopic surgeon in Borivali West, Mumbai" width={882} height={1259} fetchPriority="high" decoding="async" />
                   <span className="star" style={{ right: "-2%", top: "22%", width: 34 }}><svg viewBox="0 0 40 40"><path d="M20 2l3.5 13L36 20l-12.5 5L20 38l-3.5-13L4 20l12.5-5z" fill="currentColor" /></svg></span>
                   <span className="star" style={{ left: "4%", top: "34%", width: 18, color: "var(--blush)" }}><svg viewBox="0 0 40 40" style={{ animationDelay: "-1.4s" }}><path d="M20 2l3.5 13L36 20l-12.5 5L20 38l-3.5-13L4 20l12.5-5z" fill="currentColor" /></svg></span>
                   <svg className="sprig" style={{ left: "-16%", bottom: "6%", width: 90 }} viewBox="0 0 110 160" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -239,7 +186,7 @@ export default function HomePage() {
             </Link>
 
             <Link className="bt t6" href="/keyhole-surgery/">
-              <div className="ph6"><img src="/images/surgery.webp" alt="" loading="lazy" /></div>
+              <div className="ph6"><img src="/images/surgery.webp" alt="" loading="lazy" decoding="async" /></div>
               <div className="tx6">
                 <span className="go" style={{ color: "var(--cream)" }}><Icon name="i-arrow" /></span>
                 <span className="k">Fellowship-trained · FMAS</span>
@@ -287,7 +234,7 @@ export default function HomePage() {
           <div className="track" id="track">
             {STEPS.map((s) => (
               <article className="sc" key={s.n}>
-                <div className="im"><img src={`/images/${s.img}.webp`} alt="" loading="lazy" /><span className="num">{s.n}</span><span className="tag">{s.tag}</span></div>
+                <div className="im"><img src={`/images/${s.img}.webp`} alt="" loading="lazy" decoding="async" /><span className="num">{s.n}</span><span className="tag">{s.tag}</span></div>
                 <div className="tx"><h3>{s.h}</h3><p>{s.p}</p></div>
               </article>
             ))}
@@ -307,7 +254,7 @@ export default function HomePage() {
           </div>
 
           <div className="sx-main">
-            <div className="sx-photo sr"><img src="/images/surgery.webp" alt="Dr. Riddhi in surgical scrubs in an operating theatre" loading="lazy" />
+            <div className="sx-photo sr"><img src="/images/surgery.webp" alt="Dr. Riddhi in surgical scrubs in an operating theatre" loading="lazy" decoding="async" />
               <div className="chip"><span><b>FMAS, fellowship-trained</b><small>Minimal access surgery · laparoscopy and hysteroscopy</small></span><span className="ic"><Icon name="c-scope" /></span></div>
             </div>
             <div className="cmpx sr" id="cmpx" data-m="key">
@@ -361,8 +308,8 @@ export default function HomePage() {
       <section className="sec about" id="about">
         <div className="wrap">
           <div className="ab-media">
-            <div className="ab-frame sr"><img src="/images/about-walk.webp" alt="Dr. Riddhi D. Shah at the clinic" loading="lazy" /></div>
-            <div className="ab-name"><b>Dr. Riddhi D. Shah</b><small>Registration <Confirm label="confirm MMC no." /></small></div>
+            <div className="ab-frame sr"><img src="/images/about-walk.webp" alt="Dr. Riddhi D. Shah at the clinic" loading="lazy" decoding="async" /></div>
+            <div className="ab-name"><b>Dr. Riddhi D. Shah</b>{site.registration && <small>Registration {site.registration}</small>}</div>
           </div>
           <div>
             <span className="kick">Meet your doctor</span>
@@ -375,8 +322,8 @@ export default function HomePage() {
               <li className="sr"><span className="y">2023</span><div><b>DRM, Reproductive Medicine</b><span>University of Schleswig-Holstein, Kiel, Germany</span></div></li>
             </ul>
             <div className="awards">
-              <div className="aw sr"><img src="/images/mogs-2020-award.jpg" alt="Receiving the paper award at MOGS 2020" loading="lazy" /><div><b>First prize, best paper in High Risk Obstetrics</b><small>48th Annual Conference, MOGS, Feb 2020</small></div></div>
-              <div className="aw sr"><img src="/images/mogs-2020-presentation.jpg" alt="Presenting research at a conference" loading="lazy" /><div><b>Published research, first author</b><small>Indian Journal of Obstetrics and Gynecology</small></div></div>
+              <div className="aw sr"><img src="/images/mogs-2020-award.jpg" alt="Receiving the paper award at MOGS 2020" loading="lazy" decoding="async" /><div><b>First prize, best paper in High Risk Obstetrics</b><small>48th Annual Conference, MOGS, Feb 2020</small></div></div>
+              <div className="aw sr"><img src="/images/mogs-2020-presentation.jpg" alt="Presenting research at a conference" loading="lazy" decoding="async" /><div><b>Published research, first author</b><small>Indian Journal of Obstetrics and Gynecology</small></div></div>
             </div>
           </div>
         </div>
@@ -394,7 +341,7 @@ export default function HomePage() {
               <a className="btn b-ghost" href={site.socials.instagram} target="_blank" rel="noopener"><Icon name="i-ig" />Follow on Instagram</a>
             </div>
           </div>
-          <a className="vcover sr" href={site.socials.youtube} target="_blank" rel="noopener" aria-label="Watch Dr. Riddhi's videos on YouTube"><img src="/images/videos.webp" alt="" loading="lazy" /><span className="vplay"><Icon name="i-play" /></span></a>
+          <a className="vcover sr" href={site.socials.youtube} target="_blank" rel="noopener" aria-label="Watch Dr. Riddhi's videos on YouTube"><img src="/images/videos.webp" alt="" loading="lazy" decoding="async" /><span className="vplay"><Icon name="i-play" /></span></a>
         </div>
       </section>
 
@@ -404,7 +351,7 @@ export default function HomePage() {
             <span className="kick">Common questions</span>
             <h2 className="h2">Ask <em>anything</em></h2>
             <p className="sub">General answers to help you prepare. For advice about you, book a visit.</p>
-            <div className="reviewed"><img src="/images/halo-portrait.webp" alt="" /><span>Medically reviewed by <b style={{ color: "var(--brown)" }}>Dr. Riddhi D. Shah</b><br />Last reviewed <Confirm label="confirm date" /></span></div>
+            <div className="reviewed"><img src="/images/halo-portrait.webp" alt="" /><span>Medically reviewed by <b style={{ color: "var(--brown)" }}>Dr. Riddhi D. Shah</b><br />Last reviewed {site.reviewed}</span></div>
           </div>
           <div className="qa">
             {HOME_FAQS.map((f, i) => (
@@ -428,7 +375,7 @@ export default function HomePage() {
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
             />
-            <div className="entr"><img src="/images/clinic-entrance.jpg" alt="Clinic entrance" loading="lazy" /><small>Look for this entrance</small></div>
+            <div className="entr"><img src="/images/clinic-entrance.jpg" alt="Clinic entrance" loading="lazy" decoding="async" /><small>Look for this entrance</small></div>
           </div>
           <div className="vcard sr">
             <span className="kick">Plan your visit</span>
@@ -436,7 +383,7 @@ export default function HomePage() {
             <p className="addr">A-301/302, Swastik Building, S.V. Road, next to Vijay Sales, Dattani Nagar, Borivali West, Mumbai 400092</p>
             <div className="week" id="week"></div>
             <div className="ct">
-              <a href={site.phones[0].href}><span className="ci"><Icon name="i-phone" /></span><span>{site.phones[0].label} · {site.phones[1].label}<small>Call or WhatsApp <Confirm label="confirm WhatsApp no." /></small></span></a>
+              <a href={site.phones[0].href}><span className="ci"><Icon name="i-phone" /></span><span>{site.phones[0].label} · {site.phones[1].label}<small>Call or WhatsApp</small></span></a>
               <a href={`mailto:${site.email}`}><span className="ci"><Icon name="i-mail" /></span><span>{site.email}<small>Appointments and reports</small></span></a>
             </div>
             <div className="emerg"><Icon name="i-alert" />Medical emergency? Call 108 or 112.</div>

@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, medicalWebPageLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
+import { DevOnly } from "@/components/Confirm";
 import LearnFx from "@/components/LearnFx";
 import { site } from "@/lib/site-config";
 import "./learn.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/learn/",
   title: "Videos and articles on women's health | Dr. Riddhi D. Shah",
   description:
     "Short videos and plain-language articles by Dr. Riddhi D. Shah on periods, PCOS, pregnancy plans, screening, menopause and surgery.",
-};
+});
 
 const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
 
@@ -37,6 +40,13 @@ const CATS = ["all", "PCOS", "Periods", "Pregnancy plans", "Screening", "Surgery
 export default function LearnPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path: "/learn/", title: "Videos and articles on women's health | Dr. Riddhi D. Shah", description: "Short videos and plain-language articles by Dr. Riddhi D. Shah on periods, PCOS, pregnancy plans, screening, menopause and surgery." }),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "Videos and articles" }]),
+        ]}
+      />
+
       <section className="lh">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">
@@ -61,7 +71,7 @@ export default function LearnPage() {
             </div>
             <a className="feat rv" style={d(3)} href={site.socials.youtube} target="_blank" rel="noopener">
               <img src="/images/videos-wide.webp" alt="Dr. Riddhi explaining a topic to camera" />
-              <span className="len">Latest video <Confirm /></span>
+              <span className="len">Latest video</span>
               <span className="pl"><span className="c"><Icon name="i-play" width={28} height={28} /></span><span><small>Watch</small><b>Is my period normal?</b></span></span>
             </a>
           </div>
@@ -96,7 +106,7 @@ export default function LearnPage() {
             )
           )}
         </div>
-        <div className="wrap"><p style={{ fontSize: 13, color: "rgba(251,247,243,.55)", marginTop: 10 }}>Titles are samples. <Confirm label="confirm the 6 to 8 videos to feature" /></p></div>
+        <DevOnly><div className="wrap"><p style={{ fontSize: 13, color: "rgba(251,247,243,.55)", marginTop: 10 }}>Titles are samples.</p></div></DevOnly>
       </section>
 
       <section className="sec arts">
@@ -119,7 +129,7 @@ export default function LearnPage() {
                 <span className="bd">
                   <h3>{a.t}</h3>
                   <p>{a.p}</p>
-                  <span className="meta"><img src="/images/halo-portrait.webp" alt="" />{"big" in a && a.big ? <>{a.meta} · <Confirm label="date" /></> : a.meta}</span>
+                  <span className="meta"><img src="/images/halo-portrait.webp" alt="" />{"big" in a && a.big ? <>{a.meta} · {site.reviewed}</> : a.meta}</span>
                 </span>
               </Link>
             ))}

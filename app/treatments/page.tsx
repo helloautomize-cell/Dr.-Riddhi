@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, medicalWebPageLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
 import TreatmentsFx from "@/components/TreatmentsFx";
 import { GROUPS, GROUP_ORDER, treatmentsIn } from "@/lib/treatments";
 import "./treatments.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/treatments/",
   title: "What she treats | Dr. Riddhi D. Shah, Borivali West",
   description:
     "The 13 areas of women's health Dr. Riddhi D. Shah treats in Borivali West: periods, PCOS, fibroids, pregnancy plans, screening, menopause and keyhole surgery.",
-};
+});
 
 export default function TreatmentsHub() {
   let n = 0;
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path: "/treatments/", title: "What she treats | Dr. Riddhi D. Shah, Borivali West", description: "The 13 areas of women's health Dr. Riddhi D. Shah treats in Borivali West: periods, PCOS, fibroids, pregnancy plans, screening, menopause and keyhole surgery." }),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "Treatments" }]),
+        ]}
+      />
+
       <section className="th">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">

@@ -1,22 +1,32 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, medicalWebPageLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm, { DevOnly } from "@/components/Confirm";
+import { DevOnly } from "@/components/Confirm";
 import AboutFx from "@/components/AboutFx";
 import { site } from "@/lib/site-config";
 import "./about.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/about/",
   title: "About Dr. Riddhi D. Shah | Gynaecologist in Borivali West",
   description:
     "Dr. Riddhi D. Shah, MBBS, DNB (OBGY), FMAS, DRM — gynaecologist and laparoscopic surgeon at Mumbai Gastro-Liver and Gynaec Centre, Borivali West.",
-};
+});
 
 const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
 
 export default function AboutPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path: "/about/", title: "About Dr. Riddhi D. Shah | Gynaecologist in Borivali West", description: "Dr. Riddhi D. Shah, MBBS, DNB (OBGY), FMAS, DRM — gynaecologist and laparoscopic surgeon at Mumbai Gastro-Liver and Gynaec Centre, Borivali West." }),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "About Dr. Riddhi" }]),
+        ]}
+      />
+
       <section className="ah">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">
@@ -37,8 +47,10 @@ export default function AboutPage() {
               </p>
               <div className="facts rv" style={d(6)}>
                 <div><span className="fi"><Icon name="i-cap" /></span><div><small>Qualifications</small><b>MBBS, DNB (OBGY), FMAS, DRM</b></div></div>
-                <div><span className="fi"><Icon name="i-id" /></span><div><small>Registration</small><b>MMC <Confirm label="confirm no." /></b></div></div>
-                <div><span className="fi"><Icon name="i-lang" /></span><div><small>Languages</small><b>English, Hindi, Gujarati, Marathi <Confirm /></b></div></div>
+                {site.registration && (
+                  <div><span className="fi"><Icon name="i-id" /></span><div><small>Registration</small><b>MMC {site.registration}</b></div></div>
+                )}
+                <div><span className="fi"><Icon name="i-lang" /></span><div><small>Languages</small><b>{site.languages?.join(", ") ?? "English, Hindi, Gujarati, Marathi"}</b></div></div>
                 <div><span className="fi"><Icon name="i-pin" /></span><div><small>Clinic</small><b>MGLGC, Borivali West</b></div></div>
               </div>
               <div className="cta rv" style={d(7)}>
@@ -74,8 +86,8 @@ export default function AboutPage() {
         <div className="wrap g">
           <div className="media">
             <div className="fr" id="pfr">
-              <img src="/images/about-walk.webp" alt="Dr. Riddhi walking through the clinic corridor" loading="lazy" />
-              <img className="alt" src="/images/mogs-2020-award.jpg" alt="" loading="lazy" />
+              <img src="/images/about-walk.webp" alt="Dr. Riddhi walking through the clinic corridor" loading="lazy" decoding="async" />
+              <img className="alt" src="/images/mogs-2020-award.jpg" alt="" loading="lazy" decoding="async" />
               <span className="yr" id="pyr">2017</span>
             </div>
           </div>
@@ -116,8 +128,8 @@ export default function AboutPage() {
             <p className="sub" style={{ margin: 0 }}>Awards and papers are listed as they were given. Titles are shown in full.</p>
           </div>
           <div className="g">
-            <div className="card c1 sr"><div className="im"><img src="/images/mogs-2020-award.jpg" alt="Receiving the paper award at MOGS 2020" loading="lazy" /></div><div className="tx"><b>First prize, best paper in High Risk Obstetrics</b><small>48th Annual Conference, MOGS, February 2020</small></div></div>
-            <div className="card c2 sr"><div className="im"><img src="/images/mogs-2020-presentation.jpg" alt="Presenting research at a conference" loading="lazy" /></div><div className="tx"><b>Published research, first author</b><small>Indian Journal of Obstetrics and Gynecology</small></div></div>
+            <div className="card c1 sr"><div className="im"><img src="/images/mogs-2020-award.jpg" alt="Receiving the paper award at MOGS 2020" loading="lazy" decoding="async" /></div><div className="tx"><b>First prize, best paper in High Risk Obstetrics</b><small>48th Annual Conference, MOGS, February 2020</small></div></div>
+            <div className="card c2 sr"><div className="im"><img src="/images/mogs-2020-presentation.jpg" alt="Presenting research at a conference" loading="lazy" decoding="async" /></div><div className="tx"><b>Published research, first author</b><small>Indian Journal of Obstetrics and Gynecology</small></div></div>
             <div className="card c3 sr"><span className="big">4</span><div><b>Degrees and fellowships</b><small style={{ color: "rgba(255,255,255,.85)" }}>MBBS, DNB, FMAS and DRM, earned between 2017 and 2023.</small></div></div>
           </div>
         </div>
@@ -141,7 +153,7 @@ export default function AboutPage() {
         <div className="wrap">
           <div className="box sr">
             <a className="vid" href={site.socials.youtube} target="_blank" rel="noopener" aria-label="Watch Dr. Riddhi on YouTube">
-              <img src="/images/videos-wide.webp" alt="" loading="lazy" />
+              <img src="/images/videos-wide.webp" alt="" loading="lazy" decoding="async" />
               <span className="pl"><Icon name="i-play" width={30} height={30} /></span>
             </a>
             <div className="tx">
@@ -149,10 +161,7 @@ export default function AboutPage() {
               <h2 className="h2">The questions women feel <em>shy</em> to ask</h2>
               <p className="sub">On YouTube and Instagram she answers one question at a time, in plain words.</p>
               <DevOnly>
-                <div className="stats">
-                  <div><b><Confirm /></b><small>YouTube subscribers</small></div>
-                  <div><b><Confirm /></b><small>Instagram followers</small></div>
-                </div>
+                <div className="stats" />
               </DevOnly>
               <div className="cta">
                 <Link className="btn b-brown" href="/learn/">Videos and articles</Link>

@@ -1,0 +1,10 @@
+/* TEAM */
+Site owner: Dr. Riddhi D. Shah, Mumbai Gastro-Liver and Gynaec Centre
+Location: Borivali West, Mumbai, Maharashtra, India
+Contact: mglgc1111@gmail.com
+
+/* SITE */
+Standards: Next.js, TypeScript
+Content: Medically reviewed by Dr. Riddhi D. Shah, MBBS, DNB (OBGY), FMAS, DRM
+Last reviewed: November 2026
+Machine-readable site info: /llms.txt and /llms-full.txt

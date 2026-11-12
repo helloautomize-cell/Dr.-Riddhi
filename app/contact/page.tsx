@@ -1,20 +1,30 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, medicalWebPageLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
+import { DevOnly } from "@/components/Confirm";
 import ContactFx from "@/components/ContactFx";
 import { site } from "@/lib/site-config";
 import "./contact.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/contact/",
   title: "Book a consultation | Dr. Riddhi D. Shah, Borivali West",
   description:
     "Book a gynaecology consultation with Dr. Riddhi D. Shah in Borivali West, Mumbai. Call, WhatsApp or send the booking form. Mon to Fri.",
-};
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path: "/contact/", title: "Book a consultation | Dr. Riddhi D. Shah, Borivali West", description: "Book a gynaecology consultation with Dr. Riddhi D. Shah in Borivali West, Mumbai. Call, WhatsApp or send the booking form. Mon to Fri." }),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "Contact and book" }]),
+        ]}
+      />
+
       <section className="ch">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">
@@ -63,7 +73,7 @@ export default function ContactPage() {
                 <label className="consent full"><input type="checkbox" required /><span>I agree that the clinic may contact me on this number about my appointment, as described in the <Link href="/legal/privacy-policy/">privacy policy</Link>.</span></label>
                 <div className="sendrow full">
                   <button className="btn b-pink send" type="submit">Send booking request <span className="ar"><Icon name="i-arrow" className="fly" width={16} height={16} /></span></button>
-                  <small>Usually confirmed within working hours. <Confirm /></small>
+                  <small>Usually confirmed within working hours.</small>
                 </div>
               </form>
             </div>
@@ -78,10 +88,12 @@ export default function ContactPage() {
                       <span>{p.label}<small>Mobile</small></span>
                     </a>
                   ))}
-                  <a href="tel:+912247454296">
-                    <span className="ci"><Icon name="i-phone" /></span>
-                    <span>022 4745 4296<small>Landline <Confirm /></small></span>
-                  </a>
+                  <DevOnly>
+                    <a href="tel:+912247454296">
+                      <span className="ci"><Icon name="i-phone" /></span>
+                      <span>022 4745 4296<small>Landline</small></span>
+                    </a>
+                  </DevOnly>
                   <a href={`mailto:${site.email}`}>
                     <span className="ci"><Icon name="i-mail" /></span>
                     <span>{site.email}<small>Reports and general questions</small></span>
@@ -94,7 +106,7 @@ export default function ContactPage() {
               </div>
               <a className="wa rv" style={{ "--d": 4 } as React.CSSProperties} href={`https://wa.me/${site.whatsappNumber}?text=Hello%2C%20I%27d%20like%20to%20book%20a%20consultation%20with%20Dr.%20Riddhi.`} target="_blank" rel="noopener">
                 <span className="wi"><Icon name="i-wa" width={28} height={28} /></span>
-                <span><b>WhatsApp the clinic</b><small>A message is ready to send <Confirm label="confirm no." /></small></span>
+                <span><b>WhatsApp the clinic</b><small>A message is ready to send</small></span>
                 <span className="ar2"><Icon name="i-arrow" /></span>
               </a>
               <div className="emc rv" style={{ "--d": 5 } as React.CSSProperties}>
@@ -120,7 +132,7 @@ export default function ContactPage() {
               <text x="332" y="470" fontFamily="Figtree" fontWeight="700" fontSize="12" letterSpacing="3" fill="#5E2A2C" transform="rotate(-90 332 470)">DATTANI NAGAR</text>
             </svg>
             <div className="pin"><div className="p"><span></span></div><div className="lbl">Swastik Building<small>A-wing, 3rd floor</small></div></div>
-            <div className="entr"><img src="/images/clinic-entrance.jpg" alt="Clinic entrance" loading="lazy" /><small>Look for this entrance</small></div>
+            <div className="entr"><img src="/images/clinic-entrance.jpg" alt="Clinic entrance" loading="lazy" decoding="async" /><small>Look for this entrance</small></div>
           </div>
           <div className="vcard sr">
             <span className="kick">Find the clinic</span>

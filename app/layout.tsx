@@ -22,21 +22,24 @@ const serif = Instrument_Serif({
   display: "swap",
 });
 
-const indexable = process.env.SITE_INDEXABLE === "1";
-
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.drriddhishah.com"),
-  title: {
-    default: `${site.doctor} · ${site.role} in ${site.area}, ${site.city}`,
-    template: `%s | ${site.doctor}`,
-  },
+  metadataBase: new URL(site.url),
+  title: `${site.doctor} · ${site.role} in ${site.area}, ${site.city}`,
   description:
     "Women's health, explained calmly. Dr. Riddhi D. Shah, gynaecologist and laparoscopic surgeon at Mumbai Gastro-Liver and Gynaec Centre, Borivali West.",
-  robots: indexable
+  applicationName: site.doctor,
+  creator: site.doctor,
+  publisher: site.clinic,
+  category: "health",
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
+  robots: site.indexable
     ? { index: true, follow: true }
     : { index: false, follow: false, nocache: true },
   openGraph: {
     type: "website",
+    url: site.url,
     siteName: `${site.doctor} — ${site.role}`,
     locale: "en_IN",
     title: `${site.doctor} · ${site.role} in ${site.area}, ${site.city}`,

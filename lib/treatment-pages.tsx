@@ -1,14 +1,14 @@
 import type { ReactNode } from "react";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import type { RelItem, StripItem, TocItem } from "@/components/TreatmentPage";
+import { site } from "./site-config";
 
 /**
  * Full copy for the nine non-surgical treatment pages (PCOS lives
  * inline in the route file as the approved sample). Every page renders
  * through the same approved template sections:
  * what → signs → visit → prep → after → urgent → faqs → reviewer box.
- * Facts that need clinic sign-off are marked with <Confirm>.
+ * Facts that need clinic sign-off were marked with a Confirm chip.
  */
 
 export interface SignItem {
@@ -49,7 +49,7 @@ const REV = (
       <img src="/images/halo-portrait.webp" alt="" />
       <div>
         <b>Medically reviewed by Dr. Riddhi D. Shah</b>
-        MBBS, DNB (OBGY), FMAS, DRM · Last reviewed <Confirm label="confirm date" />. This page is for
+        MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}. This page is for
         general information and does not replace a consultation.
       </div>
     </div>
@@ -63,7 +63,7 @@ export const PCOS_LEAD =
 
 export const REVIEWED_BYLINE = (
   <>
-    Medically reviewed by <b>Dr. Riddhi D. Shah</b> · Last reviewed <Confirm label="confirm date" />
+    Medically reviewed by <b>Dr. Riddhi D. Shah</b> · Last reviewed {site.reviewed}
   </>
 );
 
@@ -167,7 +167,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a consultation",
     artLabel: "Period problems",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "Blood tests and ultrasound, only if needed" },
       { icon: "i-cal", small: "Best day to come", big: "Any day; track your cycle dates if you can" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -240,7 +240,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a consultation",
     artLabel: "Endometriosis",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "Ultrasound; laparoscopy if surgery is being considered" },
       { icon: "i-cal", small: "Best day to come", big: "Any day; a pain diary helps" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -313,7 +313,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a consultation",
     artLabel: "Fibroids",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "Ultrasound; blood tests for anaemia if bleeding is heavy" },
       { icon: "i-cal", small: "Best day to come", big: "Any day; bring old scan reports" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -386,7 +386,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a consultation",
     artLabel: "Ovarian cysts",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "Ultrasound; a blood test in some cases" },
       { icon: "i-cal", small: "Best day to come", big: "Any day; bring the scan report that found it" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -459,7 +459,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a preconception check",
     artLabel: "Preconception care",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "Blood tests tailored to you; ultrasound if needed" },
       { icon: "i-cal", small: "Best time", big: "Ideally three months before you start trying" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -532,7 +532,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a fertility check",
     artLabel: "Fertility check",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 30 minutes for the couple <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 30 minutes for the couple" },
       { icon: "i-doc", small: "Tests", big: "Blood tests, ultrasound and a semen analysis" },
       { icon: "i-cal", small: "When to come", big: "After 12 months of trying, or 6 months if she is over 35" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -606,7 +606,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     artLabel: "Screening and prevention",
     strip: [
       { icon: "i-clock", small: "The test", big: "A few minutes during the visit" },
-      { icon: "i-doc", small: "How often", big: <>Usually every 3 to 5 years <Confirm /></> },
+      { icon: "i-doc", small: "How often", big: "Usually every 3 to 5 years" },
       { icon: "i-cal", small: "Best day", big: "A day you are not on your period" },
       { icon: "i-wa", small: "Follow-up", big: "Report explained; reminder for the next one" },
     ],
@@ -682,7 +682,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a consultation",
     artLabel: "Everyday gynaecology",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "A swab or urine test, only if the exam calls for it" },
       { icon: "i-cal", small: "When to come", big: "Sooner is easier; do not wait it out for weeks" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },
@@ -755,7 +755,7 @@ export const TREATMENT_PAGES: Record<string, TreatmentDef> = {
     ctaLabel: "Book a consultation",
     artLabel: "Menopause",
     strip: [
-      { icon: "i-clock", small: "First visit", big: <>About 20 to 30 minutes <Confirm /></> },
+      { icon: "i-clock", small: "First visit", big: "About 20 to 30 minutes" },
       { icon: "i-doc", small: "Tests", big: "Blood tests and a bone-health review when needed" },
       { icon: "i-cal", small: "When to come", big: "When symptoms start bothering you, not after" },
       { icon: "i-wa", small: "Follow-up", big: "In person, or by WhatsApp for reports" },

@@ -1,33 +1,29 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, faqPageLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
+import { site } from "@/lib/site-config";
 import FaqsFx from "@/components/FaqsFx";
 import { FAQS, FAQ_TOTAL } from "@/lib/faqs";
 import "./faqs.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/faqs/",
   title: "Questions about your gynaecology visit | Dr. Riddhi D. Shah",
   description:
     "Answers to common questions about visits, periods, PCOS, pregnancy plans, screening and keyhole surgery with Dr. Riddhi D. Shah in Borivali West.",
-};
-
-const FAQ_LD = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: FAQS.flatMap((g) =>
-    g.items.map((it) => ({
-      "@type": "Question",
-      name: it.q,
-      acceptedAnswer: { "@type": "Answer", text: it.a },
-    }))
-  ),
-};
+});
 
 export default function FaqsPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_LD) }} />
+      <JsonLd
+        data={[
+          faqPageLd(FAQS.flatMap((g) => g.items)),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "Questions" }]),
+        ]}
+      />
       <section className="qh">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">
@@ -72,7 +68,7 @@ export default function FaqsPage() {
                         <span className="qt">{it.q}</span>
                         <i><Icon name="i-plus" width={18} height={18} /></i>
                       </summary>
-                      <p data-a={it.a}>{it.a}{it.confirm ? <> <Confirm label={it.confirm} /></> : null}</p>
+                      <p data-a={it.a}>{it.a}</p>
                     </details>
                   ))}
                 </div>
@@ -88,7 +84,7 @@ export default function FaqsPage() {
           </div>
           <div className="revbox" style={{ marginTop: 14 }}>
             <img src="/images/halo-portrait.webp" alt="" />
-            <div><b>Medically reviewed by Dr. Riddhi D. Shah</b>Last reviewed <Confirm label="confirm date" /></div>
+            <div><b>Medically reviewed by Dr. Riddhi D. Shah</b>Last reviewed {site.reviewed}</div>
           </div>
         </div>
       </div>

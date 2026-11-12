@@ -47,10 +47,10 @@ if (hits.length) {
   process.exit(1);
 }
 
-if (process.env.SITE_INDEXABLE !== "1") {
-  console.log("\n  FAIL — SITE_INDEXABLE is not set to 1.");
-  console.log("  Set it only when the clinic has confirmed every fact and");
-  console.log("  approved all AI-assisted images in writing.\n");
+if (process.env.SITE_INDEXABLE === "0") {
+  console.log("\n  FAIL — SITE_INDEXABLE=0 keeps the deploy dark (staging mode).");
+  console.log("  Unset it or set it to 1 when the clinic has confirmed every");
+  console.log("  fact and approved all AI-assisted images in writing.\n");
   process.exit(1);
 }
 

@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Image from "next/image";
 import { Crumbs } from "@/components/chrome";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import { SPRITE_IDS } from "@/components/Sprite";
 import { site } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/styleguide/",
   title: "Style guide",
   description:
     "Colours, type, buttons and components for the Dr. Riddhi D. Shah website.",
-};
+  noindex: true,
+});
 
 const SWATCHES: [string, string, string][] = [
   ["Brown", "--brown", "#5E2A2C"],
@@ -143,7 +145,6 @@ export default function Styleguide() {
             <button className="chip-s" aria-pressed="true">
               Active filter
             </button>
-            <Confirm />
             <span className="live">
               <span className="dot js-dot" />
               <span className="js-live">Open now</span>
@@ -173,7 +174,7 @@ export default function Styleguide() {
               />
               <div>
                 <b>Medically reviewed by {site.doctor}</b>
-                {site.qualifications} · Last reviewed <Confirm label="date" />
+                {site.qualifications} · Last reviewed {site.reviewed}
               </div>
             </div>
             <div className="urgent">

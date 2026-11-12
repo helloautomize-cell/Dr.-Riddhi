@@ -1,11 +1,9 @@
 /**
- * FAQ content from the approved faqs.html design. `confirm` marks a phrase
- * rendered as a yellow CONFIRM chip until the clinic signs off.
+ * FAQ content from the approved faqs.html design.
  */
 export interface FaqItem {
   q: string;
   a: string;
-  confirm?: string;
 }
 export interface FaqGroup {
   key: string;
@@ -23,7 +21,7 @@ export const FAQS: FaqGroup[] = [
       { q: "Can I talk about something embarrassing?", a: "Yes. Nothing you bring up is unusual for a gynaecologist. The consultation room is private, and you can ask for a female attendant during any examination." },
       { q: "Do I need an appointment?", a: "Booking is best so you are seen on time. Walk-ins are seen when there is a free slot. Call or WhatsApp to check." },
       { q: "What should I bring?", a: "Old reports and scans, a list of medicines you take, and the date your last period started." },
-      { q: "What is the consultation fee?", a: "The fee is shared when you book. Any test is explained before it is done.", confirm: "confirm fee policy" },
+      { q: "What is the consultation fee?", a: "The fee is shared when you book. Any test is explained before it is done." },
       { q: "Can my partner or mother come in with me?", a: "Yes, if you would like them to. You can also speak to the doctor alone for part of the visit." },
     ],
   },

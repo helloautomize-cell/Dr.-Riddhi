@@ -1,26 +1,32 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import ArticlePage from "@/components/ArticlePage";
 import { ARTICLE_FAQS } from "@/lib/faqs";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/learn/heavy-periods/",
   title: "How heavy is too heavy? Periods explained | Dr. Riddhi D. Shah",
   description:
     "How to tell heavy periods from normal ones: pad counts, clots, flooding and tiredness, and when to get checked. By Dr. Riddhi D. Shah, Borivali West.",
-};
+  type: "article",
+});
 
 export default function HeavyPeriodsArticle() {
   return (
     <ArticlePage
+      path="/learn/heavy-periods/"
+      title="How heavy is too heavy? Periods explained | Dr. Riddhi D. Shah"
+      description="How to tell heavy periods from normal ones: pad counts, clots, flooding and tiredness, and when to get checked. By Dr. Riddhi D. Shah, Borivali West."
+      faqs={ARTICLE_FAQS["heavy-periods"]}
       crumbs="Heavy periods"
       kick="Periods · 4 min read"
       h1={["How heavy is", "too heavy?"]}
       share="How heavy is too heavy? — Dr. Riddhi D. Shah"
       cover={{ icon: "c-drop", bg: "var(--pink)", iconColor: "var(--pink-100)" }}
       sources={[
-        "FIGO recommendations on terminology and causes of abnormal uterine bleeding. <Confirm />",
-        "Indian guidance on heavy menstrual bleeding. <Confirm />",
+        "FIGO recommendations on terminology and causes of abnormal uterine bleeding.",
+        "Indian guidance on heavy menstrual bleeding.",
       ]}
       related={[
         { href: "/treatments/period-problems/", icon: "c-drop", title: "Period problems", sub: "What happens at your visit." },
@@ -59,7 +65,7 @@ export default function HeavyPeriodsArticle() {
       <p className="callout">
         &quot;So many women have quietly rearranged their lives around heavy periods. Once we find the cause, most wish they had come in years earlier.&quot;
         <br />
-        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah <Confirm label="approve quote" /></small>
+        <small style={{ font: "500 13px var(--sans)", color: "var(--ink-2)" }}>Dr. Riddhi D. Shah</small>
       </p>
 
       <h2>Questions</h2>

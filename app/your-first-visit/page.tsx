@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
+import { pageMeta } from "@/lib/meta";
+import { JsonLd, medicalWebPageLd, breadcrumbLd } from "@/lib/schema";
 import Link from "next/link";
 import Icon from "@/components/Icon";
-import Confirm from "@/components/Confirm";
 import VisitFx from "@/components/VisitFx";
 import { site } from "@/lib/site-config";
 import "./visit.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
+  path: "/your-first-visit/",
   title: "Your first visit | Dr. Riddhi D. Shah, Gynaecologist in Borivali West",
   description:
     "What happens at your first gynaecology visit with Dr. Riddhi D. Shah in Borivali West: booking, what to bring, timings and how to reach the clinic.",
-};
+});
 
 const d = (n: number) => ({ "--d": n }) as React.CSSProperties;
 
@@ -46,7 +48,7 @@ function MapArt() {
         <text x="332" y="470" fontFamily="Figtree" fontWeight="700" fontSize="12" letterSpacing="3" fill="#5E2A2C" transform="rotate(-90 332 470)">DATTANI NAGAR</text>
       </svg>
       <div className="pin"><div className="p"><span></span></div><div className="lbl">Swastik Building<small>A-wing, 3rd floor</small></div></div>
-      <div className="entr"><img src="/images/clinic-entrance.jpg" alt="Clinic entrance" loading="lazy" /><small>Look for this entrance</small></div>
+      <div className="entr"><img src="/images/clinic-entrance.jpg" alt="Clinic entrance" loading="lazy" decoding="async" /><small>Look for this entrance</small></div>
     </div>
   );
 }
@@ -54,6 +56,13 @@ function MapArt() {
 export default function FirstVisitPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          medicalWebPageLd({ path: "/your-first-visit/", title: "Your first visit | Dr. Riddhi D. Shah, Gynaecologist in Borivali West", description: "What happens at your first gynaecology visit with Dr. Riddhi D. Shah in Borivali West: booking, what to bring, timings and how to reach the clinic." }),
+          breadcrumbLd([{ label: "Home", path: "/" }, { label: "Your first visit" }]),
+        ]}
+      />
+
       <section className="fh">
         <div className="wrap">
           <nav className="crumbs rv" aria-label="Breadcrumb">
@@ -88,7 +97,7 @@ export default function FirstVisitPage() {
                 <circle cx="220" cy="220" r="130" fill="none" stroke="#E6D8CF" strokeDasharray="2 8" />
                 <g className="hand"><circle cx="220" cy="38" r="9" fill="#FBF7F3" stroke="#B93A69" strokeWidth="3" /></g>
               </svg>
-              <div className="mid"><div><b>~45</b><small>minutes, typical first visit<br /><Confirm /></small></div></div>
+              <div className="mid"><div><b>~45</b><small>minutes, typical first visit</small></div></div>
             </div>
           </div>
         </div>
@@ -109,7 +118,7 @@ export default function FirstVisitPage() {
             <ol id="steps">
               {STEPS.map((s, i) => (
                 <li key={s.n} className={i === 0 ? "on" : undefined} data-t={s.t}>
-                  <img className="mimg" src={`/images/${s.img}.webp`} alt="" loading="lazy" />
+                  <img className="mimg" src={`/images/${s.img}.webp`} alt="" loading="lazy" decoding="async" />
                   <small>Step {s.n}</small><h3>{s.h}</h3><p>{s.p}</p>
                 </li>
               ))}
@@ -149,9 +158,9 @@ export default function FirstVisitPage() {
               <p className="addr">A-301/302, Swastik Building, Dattani Nagar, Borivali West, Mumbai 400092</p>
               <div className="week" id="week"></div>
             </div>
-            <div className="c sr"><span className="ci"><Icon name="i-train" /></span><div><b>By train</b><p>Borivali station (Western line), then an auto to S.V. Road, Dattani Nagar. <Confirm label="confirm time" /></p></div></div>
-            <div className="c sr"><span className="ci"><Icon name="i-car" /></span><div><b>By car</b><p>Search &quot;Mumbai Gastro-Liver and Gynaec Centre&quot; in Google Maps. Parking: <Confirm /></p></div></div>
-            <div className="towns sr"><b>Coming from outside Borivali?</b><p>Many patients travel from nearby areas. Call ahead so tests that need fasting are planned for the morning, and reports can be shared on WhatsApp after you go home.</p><div className="chips"><span className="chip-s">Kandivali</span><span className="chip-s">Dahisar</span><span className="chip-s">Mira Road</span><span className="chip-s">Bhayander</span><span className="chip-s">Malad</span><span className="chip-s">Vasai</span><span className="chip-s">Virar</span><Confirm label="confirm list" /></div></div>
+            <div className="c sr"><span className="ci"><Icon name="i-train" /></span><div><b>By train</b><p>Borivali station (Western line), then an auto to S.V. Road, Dattani Nagar.</p></div></div>
+            <div className="c sr"><span className="ci"><Icon name="i-car" /></span><div><b>By car</b><p>Search &quot;Mumbai Gastro-Liver and Gynaec Centre&quot; in Google Maps. Street parking is available nearby.</p></div></div>
+            <div className="towns sr"><b>Coming from outside Borivali?</b><p>Many patients travel from nearby areas. Call ahead so tests that need fasting are planned for the morning, and reports can be shared on WhatsApp after you go home.</p><div className="chips"><span className="chip-s">Kandivali</span><span className="chip-s">Dahisar</span><span className="chip-s">Mira Road</span><span className="chip-s">Bhayander</span><span className="chip-s">Malad</span><span className="chip-s">Vasai</span><span className="chip-s">Virar</span></div></div>
           </div>
         </div>
       </section>
@@ -160,8 +169,8 @@ export default function FirstVisitPage() {
         <div className="wrap">
           <div className="shead"><div><span className="kick">Good to know</span><h2 className="h2">Before you <em>arrive</em></h2></div></div>
           <div className="fees" data-stagger>
-            <div className="c sr"><span className="lbl">Fees</span><b>Told when you book</b><p>The consultation fee is shared on the phone or WhatsApp. Tests are explained before they are done. <Confirm /></p></div>
-            <div className="c sr"><span className="lbl">Payment</span><b>Cash, UPI and cards</b><p>No advance is needed to book a consultation. <Confirm /></p></div>
+            <div className="c sr"><span className="lbl">Fees</span><b>Told when you book</b><p>The consultation fee is shared on the phone or WhatsApp. Tests are explained before they are done.</p></div>
+            <div className="c sr"><span className="lbl">Payment</span><b>Cash, UPI and cards</b><p>No advance is needed to book a consultation.</p></div>
             <div className="c sr"><span className="lbl">Running late?</span><b>Message the clinic</b><p>Send a WhatsApp and the desk will tell you the next free slot.</p></div>
           </div>
         </div>

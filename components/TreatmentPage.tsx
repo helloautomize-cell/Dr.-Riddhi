@@ -111,7 +111,7 @@ export default function TreatmentPage({
                 </a>
               </div>
               <div className="byline rv" style={{ "--d": 6 } as React.CSSProperties}>
-                <img src="/images/halo-portrait.webp" alt="" />
+                <img src="/images/halo-portrait-192.webp" alt="" />
                 <span>{byline}</span>
               </div>
             </div>

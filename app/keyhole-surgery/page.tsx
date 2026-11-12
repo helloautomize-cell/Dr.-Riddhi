@@ -181,7 +181,7 @@ export default function KeyholePage() {
             </div>
             <div className="hosp">Surgery is done at empanelled hospitals in and around Borivali.</div>
             <div className="revbox" style={{ marginTop: 16 }}>
-              <img src="/images/halo-portrait.webp" alt="" />
+              <img src="/images/halo-portrait-192.webp" alt="" />
               <div><b>Medically reviewed by Dr. Riddhi D. Shah</b>FMAS, fellowship-trained in laparoscopy and hysteroscopy · Last reviewed {site.reviewed}</div>
             </div>
           </div>

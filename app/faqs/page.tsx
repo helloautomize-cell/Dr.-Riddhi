@@ -83,7 +83,7 @@ export default function FaqsPage() {
             <Link className="btn b-cream" href="/contact/#book">Ask the clinic</Link>
           </div>
           <div className="revbox" style={{ marginTop: 14 }}>
-            <img src="/images/halo-portrait.webp" alt="" />
+            <img src="/images/halo-portrait-192.webp" alt="" />
             <div><b>Medically reviewed by Dr. Riddhi D. Shah</b>Last reviewed {site.reviewed}</div>
           </div>
         </div>

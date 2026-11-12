@@ -167,7 +167,7 @@ export default function Styleguide() {
           <div style={{ display: "grid", gap: 14, maxWidth: 760 }}>
             <div className="revbox">
               <Image
-                src="/images/halo-portrait.webp"
+                src="/images/halo-portrait-192.webp"
                 alt="Dr. Riddhi D. Shah"
                 width={56}
                 height={56}

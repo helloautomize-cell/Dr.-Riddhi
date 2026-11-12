@@ -127,7 +127,7 @@ function PcosBody() {
       </div>
 
       <div className="revbox">
-        <img src="/images/halo-portrait.webp" alt="" />
+        <img src="/images/halo-portrait-192.webp" alt="" />
         <div>
           <b>Medically reviewed by Dr. Riddhi D. Shah</b>
           MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}. This page is for general information and does not replace a consultation.

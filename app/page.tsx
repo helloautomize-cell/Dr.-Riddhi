@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { preload } from "react-dom";
 import { pageMeta } from "@/lib/meta";
 import { JsonLd, physicianClinicLd, webSiteLd, faqPageLd } from "@/lib/schema";
 import Link from "next/link";
@@ -31,13 +30,6 @@ const wa = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent("Hell
 
 
 export default function HomePage() {
-  preload("/images/halo-portrait-882.webp", {
-    as: "image",
-    imageSrcSet:
-      "/images/halo-portrait-480.webp 480w, /images/halo-portrait-640.webp 640w, /images/halo-portrait-882.webp 882w",
-    imageSizes: "(max-width: 900px) 62vw, 31vw",
-    fetchPriority: "high",
-  });
   return (
     <>
       <JsonLd data={[physicianClinicLd(), webSiteLd(), faqPageLd(HOME_FAQS)]} />
@@ -70,17 +62,7 @@ export default function HomePage() {
                   <div className="ring r0"></div>
                   <div className="halo" id="halo"></div>
                   <div className="bloom" id="bloom"></div>
-                  <img
-                    className="pimg"
-                    id="pimg"
-                    src="/images/halo-portrait-882.webp"
-                    srcSet="/images/halo-portrait-480.webp 480w, /images/halo-portrait-640.webp 640w, /images/halo-portrait-882.webp 882w"
-                    sizes="(max-width: 900px) 62vw, 31vw"
-                    alt="Dr. Riddhi D. Shah, gynaecologist and laparoscopic surgeon in Borivali West, Mumbai"
-                    width={882}
-                    height={1259}
-                    decoding="async"
-                  />
+                  <img className="pimg" id="pimg" src="/images/halo-portrait.webp" alt="Dr. Riddhi D. Shah, gynaecologist and laparoscopic surgeon in Borivali West, Mumbai" width={882} height={1259} fetchPriority="high" decoding="async" />
                   <span className="star" style={{ right: "-2%", top: "22%", width: 34 }}><svg viewBox="0 0 40 40"><path d="M20 2l3.5 13L36 20l-12.5 5L20 38l-3.5-13L4 20l12.5-5z" fill="currentColor" /></svg></span>
                   <span className="star" style={{ left: "4%", top: "34%", width: 18, color: "var(--blush)" }}><svg viewBox="0 0 40 40" style={{ animationDelay: "-1.4s" }}><path d="M20 2l3.5 13L36 20l-12.5 5L20 38l-3.5-13L4 20l12.5-5z" fill="currentColor" /></svg></span>
                   <svg className="sprig" style={{ left: "-16%", bottom: "6%", width: 90 }} viewBox="0 0 110 160" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
@@ -120,7 +102,7 @@ export default function HomePage() {
           <div className="st-side"><span className="kick">A note from the doctor</span><div className="chips"><span>Periods</span><span>PCOS</span><span>Cysts</span><span>Pap smear</span><span>Menopause</span></div></div>
           <div>
             <p className="st-text" id="stText">{"Heavy periods, PCOS, a cyst on a scan, a missed cycle. Most gynae problems are".split(" ").map((w, i) => <span className="w" key={i}>{w} </span>)}<span className="w"><em>common</em>, </span>{"treatable and nothing to feel shy about. You deserve a doctor who listens first, explains everything clearly and never rushes you.".split(" ").map((w, i) => <span className="w" key={i}>{w} </span>)}</p>
-            <div className="sig"><img src="/images/halo-portrait-192.webp" alt="" /><span><b>Dr. Riddhi D. Shah</b><small>Gynaecologist and laparoscopic surgeon</small></span></div>
+            <div className="sig"><img src="/images/halo-portrait.webp" alt="" /><span><b>Dr. Riddhi D. Shah</b><small>Gynaecologist and laparoscopic surgeon</small></span></div>
           </div>
         </div>
       </section>
@@ -369,7 +351,7 @@ export default function HomePage() {
             <span className="kick">Common questions</span>
             <h2 className="h2">Ask <em>anything</em></h2>
             <p className="sub">General answers to help you prepare. For advice about you, book a visit.</p>
-            <div className="reviewed"><img src="/images/halo-portrait-192.webp" alt="" /><span>Medically reviewed by <b style={{ color: "var(--brown)" }}>Dr. Riddhi D. Shah</b><br />Last reviewed {site.reviewed}</span></div>
+            <div className="reviewed"><img src="/images/halo-portrait.webp" alt="" /><span>Medically reviewed by <b style={{ color: "var(--brown)" }}>Dr. Riddhi D. Shah</b><br />Last reviewed {site.reviewed}</span></div>
           </div>
           <div className="qa">
             {HOME_FAQS.map((f, i) => (

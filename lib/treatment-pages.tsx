@@ -46,7 +46,7 @@ export interface TreatmentDef {
 const REV = (
   <>
     <div className="revbox">
-      <img src="/images/halo-portrait-192.webp" alt="" />
+      <img src="/images/halo-portrait.webp" alt="" />
       <div>
         <b>Medically reviewed by Dr. Riddhi D. Shah</b>
         MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}. This page is for

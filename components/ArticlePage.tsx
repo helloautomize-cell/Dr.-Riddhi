@@ -74,7 +74,7 @@ export default function ArticlePage({
               <span className="ln"><span style={d(2)}><em>{h1[1]}</em></span></span>
             </h1>
             <div className="auth rv" style={d(4)}>
-              <img src="/images/halo-portrait-192.webp" alt="" />
+              <img src="/images/halo-portrait.webp" alt="" />
               <span><b>Dr. Riddhi D. Shah</b>Published and updated {site.reviewed}</span>
             </div>
           </div>
@@ -97,7 +97,7 @@ export default function ArticlePage({
         <article className="prose">
           {children}
           <div className="revbox" style={{ marginTop: 36 }}>
-            <img src="/images/halo-portrait-192.webp" alt="" />
+            <img src="/images/halo-portrait.webp" alt="" />
             <div><b>Written and reviewed by Dr. Riddhi D. Shah</b>MBBS, DNB (OBGY), FMAS, DRM · Last reviewed {site.reviewed}</div>
           </div>
           <div className="sources">

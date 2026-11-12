@@ -68,11 +68,6 @@ export default function RootLayout({
   return (
     <html lang="en-IN" data-scroll-behavior="smooth" className={`${sans.variable} ${serif.variable}`}>
       <body>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: "document.body.classList.add('on-load')",
-          }}
-        />
         <Sprite />
         <PreviewBadge />
         <PageShell>{children}</PageShell>

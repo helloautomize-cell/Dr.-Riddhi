@@ -129,7 +129,7 @@ export default function LearnPage() {
                 <span className="bd">
                   <h3>{a.t}</h3>
                   <p>{a.p}</p>
-                  <span className="meta"><img src="/images/halo-portrait-192.webp" alt="" />{"big" in a && a.big ? <>{a.meta} · {site.reviewed}</> : a.meta}</span>
+                  <span className="meta"><img src="/images/halo-portrait.webp" alt="" />{"big" in a && a.big ? <>{a.meta} · {site.reviewed}</> : a.meta}</span>
                 </span>
               </Link>
             ))}
